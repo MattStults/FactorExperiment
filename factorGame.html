@@ -1,0 +1,37 @@
+
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head> 
+	<meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
+	<title>Factoring Game</title>
+	<script src="js/jquery-1.8.2.js"></script>
+	<script src="js/jquery-ui-1.9.1.custom.js"></script>
+	<script src="js/jquery-ui-1.9.1.custom.min.js"></script>
+	<script src="js/hexboard.js"></script>
+	<style type="text/css">@import "js/jquery.svg.package-1.4.5/jquery.svg.css";</style> 
+	<script type="text/javascript" src="js/jquery.svg.package-1.4.5/jquery.svg.js"></script>
+	<script type="text/javascript" src="js/jquery.svg.package-1.4.5/jquery.svgdom.js"></script>
+	<style type="text/css">@import "factorGame.css";</style> 
+</head><body>
+	<a href="http://jquery.com/">jQuery</a>
+    <script>
+      $(document).ready(function(){
+	   $("a").click(function(event){
+	     alert("As you can see, the link no longer took you to jquery.com");
+	     event.preventDefault();
+	   });
+	 });
+      var hexboard = $("<div></div>").appendTo("body").hexboard({
+	    lhs: 3
+	  });
+	  hexboard.hexboard("option", "rhs", 3)
+	  hexboard.hexboard("option", "lhs", 1)
+    </script>
+<!--
+
+	<g transform="translate(0,-31)">
+		<text transform="translate(-30,0)">def source styled by</text>
+		<text class="col" transform="translate(-15,0)">&lt;use style="fill:green"&gt;</text>
+		<text class="col" transform="translate( 10,0)">&lt;use fill="blue"&gt;</text>
+		<text class="col" transform="translate( 35,0)">use.foo { fill:orange }</text>
+	</g>-->
+</body></html>
