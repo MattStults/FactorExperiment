@@ -1,6 +1,18 @@
 .board {
 	fill:orange;
 }
+.lhs {
+	fill:red;
+}
+.lhs.select{
+	fill:blue;
+}
+.rhs {
+	fill:red;
+}
+.rhs.select{
+	fill:blue;
+}
 .select {
 	fill:black;
 }

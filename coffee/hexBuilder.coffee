@@ -20,7 +20,7 @@ class root.HexBuilder
 				posY = 0
 				[posX, posY] = HexBuilder._gridPlot([x,y], @origin, @width, @yOffset)
 				grid[x][y] = svg.polygon(gridGroup, @hexLine, {transform: "translate("+posX+","+posY+")"})
-				$(grid[x][y]).addClass(id).addClass("x"+x).addClass("y"+y).addClass("row"+(x+y))
+				$(grid[x][y]).attr('id', id+((x-start[0])+dimensions[0]*(y-start[1]))).addClass(id).addClass("x"+(x-start[0])).addClass("y"+(y-start[1])).addClass("row"+(x+y-(start[0]+start[1])))
 		gridGroup
 
 	@_buildSideLength: (halfHeight, halfWidth) ->

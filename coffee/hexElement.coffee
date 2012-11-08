@@ -2,13 +2,12 @@ $.widget( "stults.hexElement", {
 	options: {
 		size: 5
 		hexBuilder: new HexBuilder(50, 1.15, [150,100])
-		boardId: "board"
+		elementId: "board"
 		svg: null
 	}
 
 	_setOption: (key, value) ->
 		if key is 'size' then value = @._constrainSize( value )
-		if key is 'lhs' or key is 'rhs' then value = @._constrainFactor( value )
 		if key is 'hexBuilder' then @isBuilt = false
 		@._super( key, value)
 
@@ -43,7 +42,8 @@ $.widget( "stults.hexElement", {
 
 	_create: () ->
 		@.element.addClass("hexElement")
-		@.element.svg()
+		if not @.options.svg?
+			@.element.svg()
 		@.refresh()
 	}
 )
@@ -54,19 +54,22 @@ $.widget( "stults.hexGrid", $.stults.hexElement, {
 		rhs: 0
 	}
 
+	_setOption: (key, value) ->
+		if key is 'lhs' or key is 'rhs' then value = $.stults.hexElement.prototype._constrainFactor( value )
+		@._super( key, value)
+
 	_updateBoard: (lhs, rhs) ->
 		[xSelect, xDeselect] = @._getSelectedTagsById(lhs, ".x")
 		[ySelect, yDeselect] = @._getSelectedTagsById(rhs, ".y")
-		$("."+@.options.boardId).filter($(xSelect.join(","))).filter($(ySelect.join(","))).addClass("select")
-		$((xDeselect.concat(yDeselect)).join(",")).removeClass("select")
+		$("."+@.options.elementId).filter($(xSelect.join(","))).filter($(ySelect.join(","))).addClass("select")
+		$("."+@.options.elementId).filter($(xDeselect.concat(yDeselect).join(","))).removeClass("select")
 
 	refresh: ->
-		if not @.options.svg?
-			@.options.svg = @.element.svg('get')
+		@._super('refresh')
 		
 		if (not @isBuilt? or not @isBuilt) and @.options.hexBuilder?
-			@.options.svg.clear()
-			@.options.hexBuilder.buildGrid(@.options.boardId, @.options.svg, [0,0], [@.options.size, @.options.size])
+			$("."+@.options.elementId).remove()
+			@.options.hexBuilder.buildGrid(@.options.elementId, @.options.svg, [0,0], [@.options.size, @.options.size])
 			@isBuilt = true
 
 		value = (@.options.lhs * @.options.rhs)
@@ -77,6 +80,47 @@ $.widget( "stults.hexGrid", $.stults.hexElement, {
 	}
 )
 
+$.widget( "stults.hexLine", $.stults.hexElement, {
+	options: {
+		value: 0
+		axis: 'x'
+	}
 
+	_setOption: (key, value) ->
+		if key is 'value' then value = $.stults.hexElement.prototype._constrainFactor( value )
+		@._super( key, value)
+
+	_updateBoard: (value) ->
+		[select, deselect] = @._getSelectedTagsById(value, "."+@.options.axis)
+		$("."+@.options.elementId).filter($(select.join(","))).addClass("select")
+		$("."+@.options.elementId).filter($(deselect.join(","))).removeClass("select")
+
+	_setupClickResponse: () ->
+		that = @
+		$("."+@.options.elementId).on('click', (event) ->
+			index = @.id.split(that.options.elementId)[1]	#seems like a hack.
+			that.options.value = that.options.value ^ (1 << index)
+			that.refresh()
+			)
+
+	refresh: ->
+		@._super('refresh')
+		
+		if (not @isBuilt? or not @isBuilt) and @.options.hexBuilder?
+			$("."+@.options.elementId).remove()
+			[origin, dimensions] = if @.options.axis is 'x' then [[0, -1],[@.options.size, 1]] else [[-1, 0],[1, @.options.size]]
+			@.options.hexBuilder.buildGrid(@.options.elementId, @.options.svg, origin, dimensions)
+			@._setupClickResponse()
+			@isBuilt = true
+
+		if @.options.value isnt @lastValue
+			@lastValue = @.options.value
+			@._updateBoard(@.options.value)
+			@._trigger( "update", null, {value: @.options.value})
+
+	_create: () ->
+		@._super()
+	}
+)
 
 
