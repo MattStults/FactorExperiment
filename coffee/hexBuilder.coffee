@@ -5,6 +5,7 @@ class root.HexBuilder
 		@width = height / hwRatio
 		@sideLength = HexBuilder._buildSideLength(@height/2, @width/2)
 		@hexLine = HexBuilder._buildHexLine(@height, @width, @sideLength)
+		@squareLine = HexBuilder._buildSquareLine(@sideLength)
 		@yOffset = height-(height - @sideLength)/2
 
 	@_gridPlot: (pos, origin, width, yOffset) ->
@@ -22,6 +23,14 @@ class root.HexBuilder
 				grid[x][y] = svg.polygon(gridGroup, @hexLine, {transform: "translate("+posX+","+posY+")"})
 				$(grid[x][y]).attr('id', id+((x-start[0])+dimensions[0]*(y-start[1]))).addClass(id).addClass("x"+(x-start[0])).addClass("y"+(y-start[1])).addClass("row"+(x+y-(start[0]+start[1])))
 		gridGroup
+
+	buildBoxes: (id, svg, range, xPos) ->
+		group = svg.group()
+		for y in [range[0]...range[1]]
+			[ignore, posY] = HexBuilder._gridPlot([0,y], @origin, @width, @yOffset)
+			box = svg.polygon(group, @squareLine, {transform: "translate("+xPos+","+posY+")"})
+			$(box).attr('id', id+y).addClass(id).addClass("row"+y)
+		group
 
 	@_buildSideLength: (halfHeight, halfWidth) ->
 		#first, find the y position of the side using the quadratic formula.
@@ -44,11 +53,17 @@ class root.HexBuilder
 			sideLength = (Math.sin(Math.PI/6)*halfWidth).toFixed(2)*2
 		sideLength
 
+	@_buildSquareLine: (sideLength) ->
+		half = sideLength/2.0
+		[[half, half],
+		[half, -half],
+		[-half, -half],
+		[-half, half]]
 
 	@_buildHexLine: (height, width, sideLength)->
-		halfHeight = height/2
-		halfWidth = width/2
-		sidePosY = sideLength/2
+		halfHeight = height/2.0
+		halfWidth = width/2.0
+		sidePosY = sideLength/2.0
 		#rotate clockwise around the hex
 		[[0, halfHeight], 		#top
 		[halfWidth, sidePosY],

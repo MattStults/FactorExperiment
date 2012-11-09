@@ -13,6 +13,7 @@
       this.width = height / hwRatio;
       this.sideLength = HexBuilder._buildSideLength(this.height / 2, this.width / 2);
       this.hexLine = HexBuilder._buildHexLine(this.height, this.width, this.sideLength);
+      this.squareLine = HexBuilder._buildSquareLine(this.sideLength);
       this.yOffset = height - (height - this.sideLength) / 2;
     }
 
@@ -39,6 +40,19 @@
       return gridGroup;
     };
 
+    HexBuilder.prototype.buildBoxes = function(id, svg, range, xPos) {
+      var box, group, ignore, posY, y, _i, _ref, _ref1, _ref2;
+      group = svg.group();
+      for (y = _i = _ref = range[0], _ref1 = range[1]; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; y = _ref <= _ref1 ? ++_i : --_i) {
+        _ref2 = HexBuilder._gridPlot([0, y], this.origin, this.width, this.yOffset), ignore = _ref2[0], posY = _ref2[1];
+        box = svg.polygon(group, this.squareLine, {
+          transform: "translate(" + xPos + "," + posY + ")"
+        });
+        $(box).attr('id', id + y).addClass(id).addClass("row" + y);
+      }
+      return group;
+    };
+
     HexBuilder._buildSideLength = function(halfHeight, halfWidth) {
       var a, b, c, root1, root2, sideLength, _ref;
       a = 0.75;
@@ -58,11 +72,17 @@
       return sideLength;
     };
 
+    HexBuilder._buildSquareLine = function(sideLength) {
+      var half;
+      half = sideLength / 2.0;
+      return [[half, half], [half, -half], [-half, -half], [-half, half]];
+    };
+
     HexBuilder._buildHexLine = function(height, width, sideLength) {
       var halfHeight, halfWidth, sidePosY;
-      halfHeight = height / 2;
-      halfWidth = width / 2;
-      sidePosY = sideLength / 2;
+      halfHeight = height / 2.0;
+      halfWidth = width / 2.0;
+      sidePosY = sideLength / 2.0;
       return [[0, halfHeight], [halfWidth, sidePosY], [halfWidth, -sidePosY], [0, -halfHeight], [-halfWidth, -sidePosY], [-halfWidth, sidePosY]];
     };
 

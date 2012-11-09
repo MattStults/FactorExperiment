@@ -153,4 +153,35 @@
     }
   });
 
+  $.widget("stults.boxLine", $.stults.hexElement, {
+    options: {
+      value: 0,
+      xPos: 300
+    },
+    _updateBoard: function(value) {
+      var deselect, select, _ref;
+      _ref = this._getSelectedTagsById(value, ".row"), select = _ref[0], deselect = _ref[1];
+      $("." + this.options.elementId).filter($(select.join(","))).addClass("select");
+      return $("." + this.options.elementId).filter($(deselect.join(","))).removeClass("select");
+    },
+    refresh: function() {
+      this._super('refresh');
+      if ((!(this.isBuilt != null) || !this.isBuilt) && (this.options.hexBuilder != null)) {
+        $("." + this.options.elementId).remove();
+        this.options.hexBuilder.buildBoxes(this.options.elementId, this.options.svg, [0, this.options.size], this.options.xPos);
+        this.isBuilt = true;
+      }
+      if (this.options.value !== this.lastValue) {
+        this.lastValue = this.options.value;
+        this._updateBoard(this.options.value);
+        return this._trigger("update", null, {
+          value: this.options.value
+        });
+      }
+    },
+    _create: function() {
+      return this._super();
+    }
+  });
+
 }).call(this);

@@ -24,18 +24,25 @@
       var hexBuilder = new HexBuilder(50, 1.15, [150,100]);
       var svgNode = $("<div></div>").appendTo("body").svg();
       var svg = svgNode.svg('get');
+      var result = $("<div></div>").appendTo("body").boxLine({
+	  	elementId: "result",
+	  	svg: svg,
+	  	xPos: 300,
+	  	size: 10,
+      	hexBuilder: hexBuilder
+	  });
       var hexElement = $("<div></div>").appendTo("body").hexGrid({
       	elementId: "board",
       	svg: svg,
       	hexBuilder: hexBuilder,
-	    lhs: 3,
-	    rhs: 3
+	    update: function(event, data) {
+	    	result.boxLine("option", "value", data.value);
+	    }
 	  });
 	  var lhs = $("<div></div>").appendTo("body").hexLine({
 	  	elementId: "lhs",
 	  	svg: svg,
       	hexBuilder: hexBuilder,
-	    value: 11,
 	    axis: 'x',
 	    update: function(event, data) {
 	    	hexElement.hexGrid("option", "lhs", data.value);
@@ -45,7 +52,6 @@
 	  	elementId: "rhs",
 	  	svg: svg,
       	hexBuilder: hexBuilder,
-	    value: 5,
 	    axis: 'y',
 	    update: function(event, data) {
 	    	hexElement.hexGrid("option", "rhs", data.value);

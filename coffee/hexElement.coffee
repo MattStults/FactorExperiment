@@ -123,4 +123,33 @@ $.widget( "stults.hexLine", $.stults.hexElement, {
 	}
 )
 
+$.widget( "stults.boxLine", $.stults.hexElement, {
+	options: {
+		value: 0
+		xPos: 300
+	}
+
+	_updateBoard: (value) ->
+		[select, deselect] = @._getSelectedTagsById(value, ".row")
+		$("."+@.options.elementId).filter($(select.join(","))).addClass("select")
+		$("."+@.options.elementId).filter($(deselect.join(","))).removeClass("select")
+
+	refresh: ->
+		@._super('refresh')
+		
+		if (not @isBuilt? or not @isBuilt) and @.options.hexBuilder?
+			$("."+@.options.elementId).remove()
+			@.options.hexBuilder.buildBoxes(@.options.elementId, @.options.svg, [0,@.options.size], @.options.xPos)
+			@isBuilt = true
+
+		if @.options.value isnt @lastValue
+			@lastValue = @.options.value
+			@._updateBoard(@.options.value)
+			@._trigger( "update", null, {value: @.options.value})
+
+	_create: () ->
+		@._super()
+	}
+)
+
 

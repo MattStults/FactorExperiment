@@ -7,6 +7,12 @@
 .lhs.select{
 	fill:blue;
 }
+.result{
+	fill:orange;
+}
+.result.select{
+	fill:black;
+}
 .rhs {
 	fill:red;
 }
