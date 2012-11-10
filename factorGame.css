@@ -13,6 +13,12 @@
 .result.select{
 	fill:black;
 }
+.goal{
+	fill:orange;
+}
+.goal.select{
+	fill:black;
+}
 .rhs {
 	fill:red;
 }
