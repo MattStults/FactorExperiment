@@ -1,28 +1,28 @@
-.board {
+#board {
 	fill:orange;
 }
-.lhs {
+#lhs {
 	fill:red;
 }
-.lhs.select{
+#lhs > .select{
 	fill:blue;
 }
-.result{
+#result{
 	fill:orange;
 }
-.result.select{
+#result > .select{
 	fill:black;
 }
-.goal{
+#goal{
 	fill:orange;
 }
-.goal.select{
+#goal > .select{
 	fill:black;
 }
-.rhs {
+#rhs {
 	fill:red;
 }
-.rhs.select{
+#rhs > .select{
 	fill:blue;
 }
 .select {

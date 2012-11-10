@@ -61,14 +61,14 @@ $.widget( "stults.hexGrid", $.stults.hexElement, {
 	_updateBoard: (lhs, rhs) ->
 		[xSelect, xDeselect] = @._getSelectedTagsById(lhs, ".x")
 		[ySelect, yDeselect] = @._getSelectedTagsById(rhs, ".y")
-		$("."+@.options.elementId).filter($(xSelect.join(","))).filter($(ySelect.join(","))).addClass("select")
-		$("."+@.options.elementId).filter($(xDeselect.concat(yDeselect).join(","))).removeClass("select")
+		$("#"+@.options.elementId).children().filter($(xSelect.join(","))).filter($(ySelect.join(","))).addClass("select")
+		$("#"+@.options.elementId).children().filter($(xDeselect.concat(yDeselect).join(","))).removeClass("select")
 
 	refresh: ->
 		@._super('refresh')
 		
 		if (not @isBuilt? or not @isBuilt) and @.options.hexBuilder?
-			$("."+@.options.elementId).remove()
+			$("#"+@.options.elementId).remove()
 			@.options.hexBuilder.buildGrid(@.options.elementId, @.options.svg, [0,0], [@.options.size, @.options.size])
 			@isBuilt = true
 
@@ -92,12 +92,12 @@ $.widget( "stults.hexLine", $.stults.hexElement, {
 
 	_updateBoard: (value) ->
 		[select, deselect] = @._getSelectedTagsById(value, "."+@.options.axis)
-		$("."+@.options.elementId).filter($(select.join(","))).addClass("select")
-		$("."+@.options.elementId).filter($(deselect.join(","))).removeClass("select")
+		$("#"+@.options.elementId).children().filter($(select.join(","))).addClass("select")
+		$("#"+@.options.elementId).children().filter($(deselect.join(","))).removeClass("select")
 
 	_setupClickResponse: () ->
 		that = @
-		$("."+@.options.elementId).on('click', (event) ->
+		$("#"+@.options.elementId).children().on('click', (event) ->
 			index = @.id.split(that.options.elementId)[1]	#seems like a hack.
 			that.options.value = that.options.value ^ (1 << index)
 			that.refresh()
@@ -107,7 +107,7 @@ $.widget( "stults.hexLine", $.stults.hexElement, {
 		@._super('refresh')
 		
 		if (not @isBuilt? or not @isBuilt) and @.options.hexBuilder?
-			$("."+@.options.elementId).remove()
+			$("#"+@.options.elementId).remove()
 			[origin, dimensions] = if @.options.axis is 'x' then [[0, -1],[@.options.size, 1]] else [[-1, 0],[1, @.options.size]]
 			@.options.hexBuilder.buildGrid(@.options.elementId, @.options.svg, origin, dimensions)
 			@._setupClickResponse()
@@ -131,14 +131,14 @@ $.widget( "stults.boxLine", $.stults.hexElement, {
 
 	_updateBoard: (value) ->
 		[select, deselect] = @._getSelectedTagsById(value, ".row")
-		$("."+@.options.elementId).filter($(select.join(","))).addClass("select")
-		$("."+@.options.elementId).filter($(deselect.join(","))).removeClass("select")
+		$("#"+@.options.elementId).children().filter($(select.join(","))).addClass("select")
+		$("#"+@.options.elementId).children().filter($(deselect.join(","))).removeClass("select")
 
 	refresh: ->
 		@._super('refresh')
 		
 		if (not @isBuilt? or not @isBuilt) and @.options.hexBuilder?
-			$("."+@.options.elementId).remove()
+			$("#"+@.options.elementId).remove()
 			@.options.hexBuilder.buildBoxes(@.options.elementId, @.options.svg, [0,@.options.size], @.options.xPos)
 			@isBuilt = true
 

@@ -22,9 +22,11 @@
 	     event.preventDefault();
 	   });
 	 });
-      var hexBuilder = new HexBuilder(50, 1.15, [150,100]);
       var svgNode = $("<div></div>").appendTo("body").svg();
       var svg = svgNode.svg('get');
+      var hexBuilder = new HexBuilder(50, 1.15, [150,100]);
+      hexBuilder.setupDefs(svg);
+      
       var result = $("<div></div>").appendTo("body").boxLine({
 	  	elementId: "result",
 	  	svg: svg,
@@ -52,7 +54,7 @@
 	  	elementId: "lhs",
 	  	svg: svg,
       	hexBuilder: hexBuilder,
-	    axis: 'x',
+	    axis: 'y',
 	    update: function(event, data) {
 	    	hexElement.hexGrid("option", "lhs", data.value);
 	    }
@@ -61,7 +63,7 @@
 	  	elementId: "rhs",
 	  	svg: svg,
       	hexBuilder: hexBuilder,
-	    axis: 'y',
+	    axis: 'x',
 	    update: function(event, data) {
 	    	hexElement.hexGrid("option", "rhs", data.value);
 	    }

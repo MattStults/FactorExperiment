@@ -4,32 +4,40 @@ class root.HexBuilder
 	constructor: (@height, @hwRatio, @origin) ->
 		@width = height / hwRatio
 		@sideLength = HexBuilder._buildSideLength(@height/2, @width/2)
-		@hexLine = HexBuilder._buildHexLine(@height, @width, @sideLength)
-		@squareLine = HexBuilder._buildSquareLine(@sideLength)
 		@yOffset = height-(height - @sideLength)/2
 
+	setupDefs: (svg) ->
+		if not @isInitialized? or not @isInitialized
+			@isInitialized = true
+			defs = svg.defs("hexDefs")
+			hex = svg.polygon(defs, HexBuilder._buildHexLine(@height, @width, @sideLength))
+			$(hex).attr('id', "hexagon")
+			square = svg.polygon(defs, HexBuilder._buildSquareLine(@sideLength))
+			$(square).attr('id', "resultBox")
+
 	@_gridPlot: (pos, origin, width, yOffset) ->
-		[ origin[0] + (pos[0]-pos[1])*0.5*width, origin[1] + (pos[0]+pos[1])*yOffset ]
+		[ origin[0] + (pos[0]-pos[1])*0.5*width, origin[1] + (pos[0]+pos[1])*yOffset ].map (coord) -> Math.round(coord*100)/100
+
+	buildLine: (id, svg, start, stop) ->
+		[startX, startY] = HexBuilder._gridPlot(start, @origin, @width, @yOffset)
+		[stopX, stopY] = HexBuilder._gridPlot(stop, @origin, @width, @yOffset)
+		svg.line(null, startX, startY, stopX, stopY);
 
 	buildGrid: (id, svg, start, dimensions) ->
-		gridGroup = svg.group()
-		grid = []
+		gridGroup = svg.group(null, id)
 		for x in [start[0]...dimensions[0]+start[0]]
-			grid[x] = []
 			for y in [start[1]...dimensions[1]+start[1]]
-				posX = 0
-				posY = 0
 				[posX, posY] = HexBuilder._gridPlot([x,y], @origin, @width, @yOffset)
-				grid[x][y] = svg.polygon(gridGroup, @hexLine, {transform: "translate("+posX+","+posY+")"})
-				$(grid[x][y]).attr('id', id+((x-start[0])+dimensions[0]*(y-start[1]))).addClass(id).addClass("x"+(x-start[0])).addClass("y"+(y-start[1])).addClass("row"+(x+y-(start[0]+start[1])))
+				hex = svg.use(gridGroup, posX, posY, null, null, "#hexagon")
+				$(hex).attr('id', id+((x-start[0])+dimensions[0]*(y-start[1]))).addClass("x"+(x-start[0])).addClass("y"+(y-start[1])).addClass("row"+(x+y-(start[0]+start[1])))
 		gridGroup
 
 	buildBoxes: (id, svg, range, xPos) ->
-		group = svg.group()
+		group = svg.group(null, id)
 		for y in [range[0]...range[1]]
 			[ignore, posY] = HexBuilder._gridPlot([0,y], @origin, @width, @yOffset)
-			box = svg.polygon(group, @squareLine, {transform: "translate("+xPos+","+posY+")"})
-			$(box).attr('id', id+y).addClass(id).addClass("row"+y)
+			box = svg.use(group, xPos, posY, null, null, "#resultBox")
+			$(box).attr('id', id+y).addClass("row"+y)
 		group
 
 	@_buildSideLength: (halfHeight, halfWidth) ->
@@ -53,24 +61,29 @@ class root.HexBuilder
 			sideLength = (Math.sin(Math.PI/6)*halfWidth).toFixed(2)*2
 		sideLength
 
+	@_roundPoints: (pointArray) ->
+		pointArray.map (point) -> ( point.map (coord) -> Math.round(coord*100)/100)
+
 	@_buildSquareLine: (sideLength) ->
 		half = sideLength/2.0
-		[[half, half],
-		[half, -half],
-		[-half, -half],
-		[-half, half]]
+		HexBuilder._roundPoints(
+			[[half, half],
+			[half, -half],
+			[-half, -half],
+			[-half, half]])
 
 	@_buildHexLine: (height, width, sideLength)->
 		halfHeight = height/2.0
 		halfWidth = width/2.0
 		sidePosY = sideLength/2.0
 		#rotate clockwise around the hex
-		[[0, halfHeight], 		#top
-		[halfWidth, sidePosY],
-		[halfWidth, -sidePosY],
-		[0, -halfHeight], 		#bottom
-		[-halfWidth, -sidePosY],
-		[-halfWidth, sidePosY]] #end
+		HexBuilder._roundPoints(
+			[[0, halfHeight], 		#top
+			[halfWidth, sidePosY],
+			[halfWidth, -sidePosY],
+			[0, -halfHeight], 		#bottom
+			[-halfWidth, -sidePosY],
+			[-halfWidth, sidePosY]])#end
 
 	@_solveQuadratic: (a,b,c) ->
 		base = Math.pow(Math.pow(b,2)-4*a*c,0.5)/2/a

@@ -81,14 +81,14 @@
       var xDeselect, xSelect, yDeselect, ySelect, _ref, _ref1;
       _ref = this._getSelectedTagsById(lhs, ".x"), xSelect = _ref[0], xDeselect = _ref[1];
       _ref1 = this._getSelectedTagsById(rhs, ".y"), ySelect = _ref1[0], yDeselect = _ref1[1];
-      $("." + this.options.elementId).filter($(xSelect.join(","))).filter($(ySelect.join(","))).addClass("select");
-      return $("." + this.options.elementId).filter($(xDeselect.concat(yDeselect).join(","))).removeClass("select");
+      $("#" + this.options.elementId).children().filter($(xSelect.join(","))).filter($(ySelect.join(","))).addClass("select");
+      return $("#" + this.options.elementId).children().filter($(xDeselect.concat(yDeselect).join(","))).removeClass("select");
     },
     refresh: function() {
       var value;
       this._super('refresh');
       if ((!(this.isBuilt != null) || !this.isBuilt) && (this.options.hexBuilder != null)) {
-        $("." + this.options.elementId).remove();
+        $("#" + this.options.elementId).remove();
         this.options.hexBuilder.buildGrid(this.options.elementId, this.options.svg, [0, 0], [this.options.size, this.options.size]);
         this.isBuilt = true;
       }
@@ -117,13 +117,13 @@
     _updateBoard: function(value) {
       var deselect, select, _ref;
       _ref = this._getSelectedTagsById(value, "." + this.options.axis), select = _ref[0], deselect = _ref[1];
-      $("." + this.options.elementId).filter($(select.join(","))).addClass("select");
-      return $("." + this.options.elementId).filter($(deselect.join(","))).removeClass("select");
+      $("#" + this.options.elementId).children().filter($(select.join(","))).addClass("select");
+      return $("#" + this.options.elementId).children().filter($(deselect.join(","))).removeClass("select");
     },
     _setupClickResponse: function() {
       var that;
       that = this;
-      return $("." + this.options.elementId).on('click', function(event) {
+      return $("#" + this.options.elementId).children().on('click', function(event) {
         var index;
         index = this.id.split(that.options.elementId)[1];
         that.options.value = that.options.value ^ (1 << index);
@@ -134,7 +134,7 @@
       var dimensions, origin, _ref;
       this._super('refresh');
       if ((!(this.isBuilt != null) || !this.isBuilt) && (this.options.hexBuilder != null)) {
-        $("." + this.options.elementId).remove();
+        $("#" + this.options.elementId).remove();
         _ref = this.options.axis === 'x' ? [[0, -1], [this.options.size, 1]] : [[-1, 0], [1, this.options.size]], origin = _ref[0], dimensions = _ref[1];
         this.options.hexBuilder.buildGrid(this.options.elementId, this.options.svg, origin, dimensions);
         this._setupClickResponse();
@@ -161,13 +161,13 @@
     _updateBoard: function(value) {
       var deselect, select, _ref;
       _ref = this._getSelectedTagsById(value, ".row"), select = _ref[0], deselect = _ref[1];
-      $("." + this.options.elementId).filter($(select.join(","))).addClass("select");
-      return $("." + this.options.elementId).filter($(deselect.join(","))).removeClass("select");
+      $("#" + this.options.elementId).children().filter($(select.join(","))).addClass("select");
+      return $("#" + this.options.elementId).children().filter($(deselect.join(","))).removeClass("select");
     },
     refresh: function() {
       this._super('refresh');
       if ((!(this.isBuilt != null) || !this.isBuilt) && (this.options.hexBuilder != null)) {
-        $("." + this.options.elementId).remove();
+        $("#" + this.options.elementId).remove();
         this.options.hexBuilder.buildBoxes(this.options.elementId, this.options.svg, [0, this.options.size], this.options.xPos);
         this.isBuilt = true;
       }
