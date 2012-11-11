@@ -50,22 +50,22 @@
 	    	result.boxLine("option", "value", data.value);
 	    }
 	  });
-	  var lhs = $("<div></div>").appendTo("body").hexLine({
-	  	elementId: "lhs",
-	  	svg: svg,
-      	hexBuilder: hexBuilder,
-	    axis: 'y',
-	    update: function(event, data) {
-	    	hexElement.hexGrid("option", "lhs", data.value);
-	    }
-	  });
 	  var rhs = $("<div></div>").appendTo("body").hexLine({
 	  	elementId: "rhs",
 	  	svg: svg,
       	hexBuilder: hexBuilder,
-	    axis: 'x',
+	    axis: 'y',
 	    update: function(event, data) {
 	    	hexElement.hexGrid("option", "rhs", data.value);
+	    }
+	  });
+	  var lhs = $("<div></div>").appendTo("body").hexLine({
+	  	elementId: "lhs",
+	  	svg: svg,
+      	hexBuilder: hexBuilder,
+	    axis: 'x',
+	    update: function(event, data) {
+	    	hexElement.hexGrid("option", "lhs", data.value);
 	    }
 	  });
     </script>
