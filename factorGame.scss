@@ -1,0 +1,42 @@
+#gameBoard {
+	fill: blue;
+	> .select{
+		fill: lightgray;
+	}
+}
+#gameLhs{
+	fill: darkblue;
+	> .select{
+		fill: lightblue;
+	}
+}
+#gameRhs{
+	@extend #gameLhs
+}
+#gameResult{
+	fill: darkblue;
+	> .select{
+		fill: lightgray;
+	}
+}
+#gameGoal{
+	@extend #gameResult
+}
+
+@mixin vendor-prefix($name, $argument) {
+  #{$name}: $argument;
+  -moz-#{$name}: $argument;
+  -webkit-#{$name}: $argument;
+  -o-#{$name}: $argument;
+  -ms-#{$name}: $argument;
+}
+
+$rows: 10;
+$rowDelayDelta: 0.02;
+$transitionTime: 0.2s;
+@for $i from 0 through $rows {
+	.row#{$i} {
+		@include vendor-prefix(transition, $transitionTime);
+		@include vendor-prefix(transition-delay, 1s * $i * $rowDelayDelta);
+	}
+}

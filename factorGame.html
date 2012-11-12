@@ -8,6 +8,7 @@
 	<script src="js/jquery-ui-1.9.1.custom.min.js"></script>
 	<script src="js/hexBuilder.js"></script>
 	<script src="js/hexElement.js"></script>
+	<script src="js/primeGame.js"></script>
 	<script src="js/utility.js"></script>
 	<style type="text/css">@import "js/jquery.svg.package-1.4.5/jquery.svg.css";</style> 
 	<script type="text/javascript" src="js/jquery.svg.package-1.4.5/jquery.svg.js"></script>
@@ -27,46 +28,12 @@
       var hexBuilder = new HexBuilder(50, 1.15, [150,100]);
       hexBuilder.setupDefs(svg);
       
-      var result = $("<div></div>").appendTo("body").boxLine({
-	  	elementId: "result",
+      var primeGame = $("<div></div>").appendTo("body").primeGame({
+	  	elementId: "game",
 	  	svg: svg,
-	  	xPos: 300,
-	  	size: 10,
+	  	size: 5,
+	  	goalValue: util.getURLParm("value", 77),
       	hexBuilder: hexBuilder
-	  });
-	  var goal = $("<div></div>").appendTo("body").boxLine({
-	  	elementId: "goal",
-	  	svg: svg,
-	  	xPos: 350,
-	  	size: 10,
-	  	value: util.getURLParm("value", 77),
-      	hexBuilder: hexBuilder
-	  });
-      var hexElement = $("<div></div>").appendTo("body").hexGrid({
-      	elementId: "board",
-      	svg: svg,
-      	hexBuilder: hexBuilder,
-	    update: function(event, data) {
-	    	result.boxLine("option", "value", data.value);
-	    }
-	  });
-	  var rhs = $("<div></div>").appendTo("body").hexLine({
-	  	elementId: "rhs",
-	  	svg: svg,
-      	hexBuilder: hexBuilder,
-	    axis: 'y',
-	    update: function(event, data) {
-	    	hexElement.hexGrid("option", "rhs", data.value);
-	    }
-	  });
-	  var lhs = $("<div></div>").appendTo("body").hexLine({
-	  	elementId: "lhs",
-	  	svg: svg,
-      	hexBuilder: hexBuilder,
-	    axis: 'x',
-	    update: function(event, data) {
-	    	hexElement.hexGrid("option", "lhs", data.value);
-	    }
 	  });
     </script>
 </body></html>
