@@ -38,7 +38,7 @@ $.widget( "stults.primeGame", {
 			elementId: @.options.elementId + "Goal"
 			svg: @.options.svg
 			#position is just hacked in for now.
-			xPos: 350
+			xPos: 375
 			size: @.options.size*2
 			value: @.options.goalValue
 			hexBuilder: @.options.hexBuilder
@@ -47,7 +47,7 @@ $.widget( "stults.primeGame", {
 			elementId: @.options.elementId + "Result"
 			svg: @.options.svg
 			#position is just hacked in for now.
-			xPos: 300
+			xPos: 325
 			size: @.options.size*2
 			value: 0
 			hexBuilder: @.options.hexBuilder

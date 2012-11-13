@@ -46,7 +46,7 @@
       this.goal = $("<div></div>").appendTo(this.element).boxLine({
         elementId: this.options.elementId + "Goal",
         svg: this.options.svg,
-        xPos: 350,
+        xPos: 375,
         size: this.options.size * 2,
         value: this.options.goalValue,
         hexBuilder: this.options.hexBuilder
@@ -54,7 +54,7 @@
       this.result = $("<div></div>").appendTo(this.element).boxLine({
         elementId: this.options.elementId + "Result",
         svg: this.options.svg,
-        xPos: 300,
+        xPos: 325,
         size: this.options.size * 2,
         value: 0,
         hexBuilder: this.options.hexBuilder

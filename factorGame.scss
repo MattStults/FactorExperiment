@@ -1,27 +1,9 @@
-#gameBoard {
-	fill: blue;
-	> .select{
-		fill: lightgray;
-	}
-}
-#gameLhs{
-	fill: darkblue;
-	> .select{
-		fill: lightblue;
-	}
-}
-#gameRhs{
-	@extend #gameLhs
-}
-#gameResult{
-	fill: darkblue;
-	> .select{
-		fill: lightgray;
-	}
-}
-#gameGoal{
-	@extend #gameResult
-}
+$backBlue: #000040;
+$lineWhite: #ffffff;
+$unselect: #0000a0;
+$darkLine: lighten($unselect, 5%);
+$select: blue;
+$selectBright: lighten(blue, 20%);
 
 @mixin vendor-prefix($name, $argument) {
   #{$name}: $argument;
@@ -31,12 +13,84 @@
   -ms-#{$name}: $argument;
 }
 
+#gameBoard {
+	fill: rgba($backBlue, 0);
+	stroke: $darkLine;
+}
+#gameResult{
+	fill: $unselect;
+	> .select {
+		@include vendor-prefix(animation-name, glowBright);
+		fill: $selectBright;
+	}
+}
+#gameGoal{
+	@extend #gameResult;
+}
+#gameLhs{
+	@extend #gameResult;
+	stroke: $lineWhite;
+	stroke-width: 2;
+	
+}
+#gameRhs{
+	@extend #gameLhs;
+}
+svg{
+	background: $backBlue;
+}
+
+.select{
+	//in case animation isn't supported
+	fill: $select;
+	//animation
+	@include vendor-prefix(animation-name, glow);
+	@include vendor-prefix(animation-duration, 5s);
+	@include vendor-prefix(animation-iteration-count, infinite);
+	@include vendor-prefix(animation-direction, alternate);
+}
+
 $rows: 10;
-$rowDelayDelta: 0.02;
+$rowDelayDelta: 0.03;
 $transitionTime: 0.2s;
 @for $i from 0 through $rows {
 	.row#{$i} {
+		$delay: 1s * $i * $rowDelayDelta;
 		@include vendor-prefix(transition, $transitionTime);
-		@include vendor-prefix(transition-delay, 1s * $i * $rowDelayDelta);
+		@include vendor-prefix(animation-delay, $delay);
+		@include vendor-prefix(transition-delay, $delay);
 	}
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content; 
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  } 
+}
+
+@include keyframes(glowBright) {
+  0% { fill:$selectBright; }
+  7% { fill:darken($selectBright, 5%); }
+  20% { fill:darken($selectBright, 1%); }
+  50% { fill:darken($selectBright, 10%); }
+  80% { fill:$selectBright; }
+  80% { fill:darken($selectBright, 5%); }
+}
+
+@include keyframes(glow) {
+  0% { fill:$select; }
+  7% { fill:darken($select, 5%); }
+  20% { fill:darken($select, 1%); }
+  50% { fill:darken($select, 10%); }
+  80% { fill:$select; }
+  80% { fill:darken($select, 5%); }
 }
