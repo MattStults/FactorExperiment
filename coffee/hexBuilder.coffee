@@ -27,9 +27,18 @@ class root.HexBuilder
 		gridGroup = svg.group(null, id)
 		for x in [start[0]...dimensions[0]+start[0]]
 			for y in [start[1]...dimensions[1]+start[1]]
+				hexGroup = svg.group(gridGroup, id+((x-start[0])+dimensions[0]*(y-start[1])))
 				[posX, posY] = HexBuilder._gridPlot([x,y], @origin, @width, @yOffset)
-				hex = svg.use(gridGroup, posX, posY, null, null, "#hexagon")
-				$(hex).attr('id', id+((x-start[0])+dimensions[0]*(y-start[1]))).addClass("x"+(x-start[0])).addClass("y"+(y-start[1])).addClass("row"+(x+y-(start[0]+start[1])))
+				row = (x+y-(start[0]+start[1]))
+				$(hexGroup).addClass("x"+(x-start[0])).addClass("y"+(y-start[1])).addClass("row"+row)
+
+				#hex
+				hex = svg.use(hexGroup, posX, posY, null, null, "#hexagon")
+
+				#text --> should probably move.
+				text = svg.text(hexGroup, ""+(1 << row))
+				$(text).attr("x", posX - text.offsetWidth/2).attr("y",posY + text.offsetHeight/4)
+
 		gridGroup
 
 	buildBoxes: (id, svg, range, xPos) ->

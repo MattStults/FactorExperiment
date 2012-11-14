@@ -1,6 +1,15 @@
+text {
+  font-weight: bold; }
+
 #gameBoard {
   fill: rgba(0, 0, 64, 0);
   stroke: #0000ba; }
+  #gameBoard > g > text {
+    fill: #0000ba;
+    stroke: none; }
+  #gameBoard > g.select > text {
+    fill: #8080ff;
+    stroke: none; }
 
 #gameResult, #gameGoal, #gameLhs, #gameRhs {
   fill: #0000a0; }
@@ -10,11 +19,17 @@
     -webkit-animation-name: glowBright;
     -o-animation-name: glowBright;
     -ms-animation-name: glowBright;
-    fill: #6666ff; }
+    fill: #8080ff; }
 
 #gameLhs, #gameRhs {
   stroke: white;
   stroke-width: 2; }
+  #gameLhs > g > text, #gameRhs > g > text {
+    fill: #8080ff;
+    stroke: none; }
+  #gameLhs > g.select > text, #gameRhs > g.select > text {
+    fill: white;
+    stroke: none; }
 
 svg {
   background: #000040; }
@@ -58,6 +73,22 @@ svg {
   -webkit-transition-delay: 0s;
   -o-transition-delay: 0s;
   -ms-transition-delay: 0s; }
+  .row0 > text {
+    transition: 0.2s;
+    -moz-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    -ms-transition: 0.2s;
+    animation-delay: 0s;
+    -moz-animation-delay: 0s;
+    -webkit-animation-delay: 0s;
+    -o-animation-delay: 0s;
+    -ms-animation-delay: 0s;
+    transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -webkit-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    -ms-transition-delay: 0s; }
 
 .row1 {
   transition: 0.2s;
@@ -75,6 +106,22 @@ svg {
   -webkit-transition-delay: 0.03s;
   -o-transition-delay: 0.03s;
   -ms-transition-delay: 0.03s; }
+  .row1 > text {
+    transition: 0.2s;
+    -moz-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    -ms-transition: 0.2s;
+    animation-delay: 0.03s;
+    -moz-animation-delay: 0.03s;
+    -webkit-animation-delay: 0.03s;
+    -o-animation-delay: 0.03s;
+    -ms-animation-delay: 0.03s;
+    transition-delay: 0.03s;
+    -moz-transition-delay: 0.03s;
+    -webkit-transition-delay: 0.03s;
+    -o-transition-delay: 0.03s;
+    -ms-transition-delay: 0.03s; }
 
 .row2 {
   transition: 0.2s;
@@ -92,6 +139,22 @@ svg {
   -webkit-transition-delay: 0.06s;
   -o-transition-delay: 0.06s;
   -ms-transition-delay: 0.06s; }
+  .row2 > text {
+    transition: 0.2s;
+    -moz-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    -ms-transition: 0.2s;
+    animation-delay: 0.06s;
+    -moz-animation-delay: 0.06s;
+    -webkit-animation-delay: 0.06s;
+    -o-animation-delay: 0.06s;
+    -ms-animation-delay: 0.06s;
+    transition-delay: 0.06s;
+    -moz-transition-delay: 0.06s;
+    -webkit-transition-delay: 0.06s;
+    -o-transition-delay: 0.06s;
+    -ms-transition-delay: 0.06s; }
 
 .row3 {
   transition: 0.2s;
@@ -109,6 +172,22 @@ svg {
   -webkit-transition-delay: 0.09s;
   -o-transition-delay: 0.09s;
   -ms-transition-delay: 0.09s; }
+  .row3 > text {
+    transition: 0.2s;
+    -moz-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    -ms-transition: 0.2s;
+    animation-delay: 0.09s;
+    -moz-animation-delay: 0.09s;
+    -webkit-animation-delay: 0.09s;
+    -o-animation-delay: 0.09s;
+    -ms-animation-delay: 0.09s;
+    transition-delay: 0.09s;
+    -moz-transition-delay: 0.09s;
+    -webkit-transition-delay: 0.09s;
+    -o-transition-delay: 0.09s;
+    -ms-transition-delay: 0.09s; }
 
 .row4 {
   transition: 0.2s;
@@ -126,6 +205,22 @@ svg {
   -webkit-transition-delay: 0.12s;
   -o-transition-delay: 0.12s;
   -ms-transition-delay: 0.12s; }
+  .row4 > text {
+    transition: 0.2s;
+    -moz-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    -ms-transition: 0.2s;
+    animation-delay: 0.12s;
+    -moz-animation-delay: 0.12s;
+    -webkit-animation-delay: 0.12s;
+    -o-animation-delay: 0.12s;
+    -ms-animation-delay: 0.12s;
+    transition-delay: 0.12s;
+    -moz-transition-delay: 0.12s;
+    -webkit-transition-delay: 0.12s;
+    -o-transition-delay: 0.12s;
+    -ms-transition-delay: 0.12s; }
 
 .row5 {
   transition: 0.2s;
@@ -143,6 +238,22 @@ svg {
   -webkit-transition-delay: 0.15s;
   -o-transition-delay: 0.15s;
   -ms-transition-delay: 0.15s; }
+  .row5 > text {
+    transition: 0.2s;
+    -moz-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    -ms-transition: 0.2s;
+    animation-delay: 0.15s;
+    -moz-animation-delay: 0.15s;
+    -webkit-animation-delay: 0.15s;
+    -o-animation-delay: 0.15s;
+    -ms-animation-delay: 0.15s;
+    transition-delay: 0.15s;
+    -moz-transition-delay: 0.15s;
+    -webkit-transition-delay: 0.15s;
+    -o-transition-delay: 0.15s;
+    -ms-transition-delay: 0.15s; }
 
 .row6 {
   transition: 0.2s;
@@ -160,6 +271,22 @@ svg {
   -webkit-transition-delay: 0.18s;
   -o-transition-delay: 0.18s;
   -ms-transition-delay: 0.18s; }
+  .row6 > text {
+    transition: 0.2s;
+    -moz-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    -ms-transition: 0.2s;
+    animation-delay: 0.18s;
+    -moz-animation-delay: 0.18s;
+    -webkit-animation-delay: 0.18s;
+    -o-animation-delay: 0.18s;
+    -ms-animation-delay: 0.18s;
+    transition-delay: 0.18s;
+    -moz-transition-delay: 0.18s;
+    -webkit-transition-delay: 0.18s;
+    -o-transition-delay: 0.18s;
+    -ms-transition-delay: 0.18s; }
 
 .row7 {
   transition: 0.2s;
@@ -177,6 +304,22 @@ svg {
   -webkit-transition-delay: 0.21s;
   -o-transition-delay: 0.21s;
   -ms-transition-delay: 0.21s; }
+  .row7 > text {
+    transition: 0.2s;
+    -moz-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    -ms-transition: 0.2s;
+    animation-delay: 0.21s;
+    -moz-animation-delay: 0.21s;
+    -webkit-animation-delay: 0.21s;
+    -o-animation-delay: 0.21s;
+    -ms-animation-delay: 0.21s;
+    transition-delay: 0.21s;
+    -moz-transition-delay: 0.21s;
+    -webkit-transition-delay: 0.21s;
+    -o-transition-delay: 0.21s;
+    -ms-transition-delay: 0.21s; }
 
 .row8 {
   transition: 0.2s;
@@ -194,6 +337,22 @@ svg {
   -webkit-transition-delay: 0.24s;
   -o-transition-delay: 0.24s;
   -ms-transition-delay: 0.24s; }
+  .row8 > text {
+    transition: 0.2s;
+    -moz-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    -ms-transition: 0.2s;
+    animation-delay: 0.24s;
+    -moz-animation-delay: 0.24s;
+    -webkit-animation-delay: 0.24s;
+    -o-animation-delay: 0.24s;
+    -ms-animation-delay: 0.24s;
+    transition-delay: 0.24s;
+    -moz-transition-delay: 0.24s;
+    -webkit-transition-delay: 0.24s;
+    -o-transition-delay: 0.24s;
+    -ms-transition-delay: 0.24s; }
 
 .row9 {
   transition: 0.2s;
@@ -211,6 +370,22 @@ svg {
   -webkit-transition-delay: 0.27s;
   -o-transition-delay: 0.27s;
   -ms-transition-delay: 0.27s; }
+  .row9 > text {
+    transition: 0.2s;
+    -moz-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    -ms-transition: 0.2s;
+    animation-delay: 0.27s;
+    -moz-animation-delay: 0.27s;
+    -webkit-animation-delay: 0.27s;
+    -o-animation-delay: 0.27s;
+    -ms-animation-delay: 0.27s;
+    transition-delay: 0.27s;
+    -moz-transition-delay: 0.27s;
+    -webkit-transition-delay: 0.27s;
+    -o-transition-delay: 0.27s;
+    -ms-transition-delay: 0.27s; }
 
 .row10 {
   transition: 0.2s;
@@ -228,82 +403,98 @@ svg {
   -webkit-transition-delay: 0.3s;
   -o-transition-delay: 0.3s;
   -ms-transition-delay: 0.3s; }
+  .row10 > text {
+    transition: 0.2s;
+    -moz-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    -ms-transition: 0.2s;
+    animation-delay: 0.3s;
+    -moz-animation-delay: 0.3s;
+    -webkit-animation-delay: 0.3s;
+    -o-animation-delay: 0.3s;
+    -ms-animation-delay: 0.3s;
+    transition-delay: 0.3s;
+    -moz-transition-delay: 0.3s;
+    -webkit-transition-delay: 0.3s;
+    -o-transition-delay: 0.3s;
+    -ms-transition-delay: 0.3s; }
 
 @-webkit-keyframes glowBright {
   0% {
-    fill: #6666ff; }
+    fill: #8080ff; }
 
   7% {
-    fill: #4d4dff; }
-
-  20% {
-    fill: #6161ff; }
-
-  50% {
-    fill: #3333ff; }
-
-  80% {
     fill: #6666ff; }
 
+  20% {
+    fill: #7a7aff; }
+
+  50% {
+    fill: #4d4dff; }
+
   80% {
-    fill: #4d4dff; } }
+    fill: #8080ff; }
+
+  80% {
+    fill: #6666ff; } }
 
 @-moz-keyframes glowBright {
   0% {
-    fill: #6666ff; }
+    fill: #8080ff; }
 
   7% {
-    fill: #4d4dff; }
-
-  20% {
-    fill: #6161ff; }
-
-  50% {
-    fill: #3333ff; }
-
-  80% {
     fill: #6666ff; }
 
+  20% {
+    fill: #7a7aff; }
+
+  50% {
+    fill: #4d4dff; }
+
   80% {
-    fill: #4d4dff; } }
+    fill: #8080ff; }
+
+  80% {
+    fill: #6666ff; } }
 
 @-ms-keyframes glowBright {
   0% {
-    fill: #6666ff; }
+    fill: #8080ff; }
 
   7% {
-    fill: #4d4dff; }
-
-  20% {
-    fill: #6161ff; }
-
-  50% {
-    fill: #3333ff; }
-
-  80% {
     fill: #6666ff; }
 
+  20% {
+    fill: #7a7aff; }
+
+  50% {
+    fill: #4d4dff; }
+
   80% {
-    fill: #4d4dff; } }
+    fill: #8080ff; }
+
+  80% {
+    fill: #6666ff; } }
 
 @keyframes glowBright {
   0% {
-    fill: #6666ff; }
+    fill: #8080ff; }
 
   7% {
-    fill: #4d4dff; }
-
-  20% {
-    fill: #6161ff; }
-
-  50% {
-    fill: #3333ff; }
-
-  80% {
     fill: #6666ff; }
 
+  20% {
+    fill: #7a7aff; }
+
+  50% {
+    fill: #4d4dff; }
+
   80% {
-    fill: #4d4dff; } }
+    fill: #8080ff; }
+
+  80% {
+    fill: #6666ff; } }
 
 @-webkit-keyframes glow {
   0% {

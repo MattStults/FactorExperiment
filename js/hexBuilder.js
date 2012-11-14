@@ -41,13 +41,17 @@
     };
 
     HexBuilder.prototype.buildGrid = function(id, svg, start, dimensions) {
-      var gridGroup, hex, posX, posY, x, y, _i, _j, _ref, _ref1, _ref2, _ref3, _ref4;
+      var gridGroup, hex, hexGroup, posX, posY, row, text, x, y, _i, _j, _ref, _ref1, _ref2, _ref3, _ref4;
       gridGroup = svg.group(null, id);
       for (x = _i = _ref = start[0], _ref1 = dimensions[0] + start[0]; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; x = _ref <= _ref1 ? ++_i : --_i) {
         for (y = _j = _ref2 = start[1], _ref3 = dimensions[1] + start[1]; _ref2 <= _ref3 ? _j < _ref3 : _j > _ref3; y = _ref2 <= _ref3 ? ++_j : --_j) {
+          hexGroup = svg.group(gridGroup, id + ((x - start[0]) + dimensions[0] * (y - start[1])));
           _ref4 = HexBuilder._gridPlot([x, y], this.origin, this.width, this.yOffset), posX = _ref4[0], posY = _ref4[1];
-          hex = svg.use(gridGroup, posX, posY, null, null, "#hexagon");
-          $(hex).attr('id', id + ((x - start[0]) + dimensions[0] * (y - start[1]))).addClass("x" + (x - start[0])).addClass("y" + (y - start[1])).addClass("row" + (x + y - (start[0] + start[1])));
+          row = x + y - (start[0] + start[1]);
+          $(hexGroup).addClass("x" + (x - start[0])).addClass("y" + (y - start[1])).addClass("row" + row);
+          hex = svg.use(hexGroup, posX, posY, null, null, "#hexagon");
+          text = svg.text(hexGroup, "" + (1 << row));
+          $(text).attr("x", posX - text.offsetWidth / 2).attr("y", posY + text.offsetHeight / 4);
         }
       }
       return gridGroup;
