@@ -41,7 +41,7 @@
     };
 
     HexBuilder.prototype.buildGrid = function(id, svg, start, dimensions) {
-      var gridGroup, hex, hexGroup, posX, posY, row, text, x, y, _i, _j, _ref, _ref1, _ref2, _ref3, _ref4;
+      var gridGroup, hex, hexGroup, posX, posY, row, x, y, _i, _j, _ref, _ref1, _ref2, _ref3, _ref4;
       gridGroup = svg.group(null, id);
       for (x = _i = _ref = start[0], _ref1 = dimensions[0] + start[0]; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; x = _ref <= _ref1 ? ++_i : --_i) {
         for (y = _j = _ref2 = start[1], _ref3 = dimensions[1] + start[1]; _ref2 <= _ref3 ? _j < _ref3 : _j > _ref3; y = _ref2 <= _ref3 ? ++_j : --_j) {
@@ -50,20 +50,21 @@
           row = x + y - (start[0] + start[1]);
           $(hexGroup).addClass("x" + (x - start[0])).addClass("y" + (y - start[1])).addClass("row" + row);
           hex = svg.use(hexGroup, posX, posY, null, null, "#hexagon");
-          text = svg.text(hexGroup, "" + (1 << row));
-          $(text).attr("x", posX - text.offsetWidth / 2).attr("y", posY + text.offsetHeight / 4);
+          util.drawTextAtPoint(svg, hexGroup, [posX, posY], "" + (1 << row));
         }
       }
       return gridGroup;
     };
 
     HexBuilder.prototype.buildBoxes = function(id, svg, range, xPos) {
-      var box, group, ignore, posY, y, _i, _ref, _ref1, _ref2;
+      var box, boxGroup, group, ignore, posY, y, _i, _ref, _ref1, _ref2;
       group = svg.group(null, id);
       for (y = _i = _ref = range[0], _ref1 = range[1]; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; y = _ref <= _ref1 ? ++_i : --_i) {
         _ref2 = HexBuilder._gridPlot([0, y], this.origin, this.width, this.yOffset), ignore = _ref2[0], posY = _ref2[1];
-        box = svg.use(group, xPos, posY, null, null, "#resultBox");
-        $(box).attr('id', id + y).addClass("row" + y);
+        boxGroup = svg.group(group, id + y);
+        $(boxGroup).addClass("row" + y);
+        box = svg.use(boxGroup, xPos, posY, null, null, "#resultBox");
+        util.drawTextAtPoint(svg, boxGroup, [xPos, posY], "" + (1 << y));
       }
       return group;
     };

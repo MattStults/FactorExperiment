@@ -34,19 +34,18 @@ class root.HexBuilder
 
 				#hex
 				hex = svg.use(hexGroup, posX, posY, null, null, "#hexagon")
-
-				#text --> should probably move.
-				text = svg.text(hexGroup, ""+(1 << row))
-				$(text).attr("x", posX - text.offsetWidth/2).attr("y",posY + text.offsetHeight/4)
-
+				util.drawTextAtPoint(svg, hexGroup, [posX, posY], ""+(1<<row))
+				
 		gridGroup
 
 	buildBoxes: (id, svg, range, xPos) ->
 		group = svg.group(null, id)
 		for y in [range[0]...range[1]]
 			[ignore, posY] = HexBuilder._gridPlot([0,y], @origin, @width, @yOffset)
-			box = svg.use(group, xPos, posY, null, null, "#resultBox")
-			$(box).attr('id', id+y).addClass("row"+y)
+			boxGroup = svg.group(group, id+y)
+			$(boxGroup).addClass("row"+y)
+			box = svg.use(boxGroup, xPos, posY, null, null, "#resultBox")
+			util.drawTextAtPoint(svg, boxGroup, [xPos, posY], ""+(1<<y))
 		group
 
 	@_buildSideLength: (halfHeight, halfWidth) ->

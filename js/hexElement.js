@@ -164,11 +164,14 @@
       $("#" + this.options.elementId).children().filter($(select.join(","))).addClass("select");
       return $("#" + this.options.elementId).children().filter($(deselect.join(","))).removeClass("select");
     },
+    getGroup: function() {
+      return this.rootGroup;
+    },
     refresh: function() {
       this._super('refresh');
       if ((!(this.isBuilt != null) || !this.isBuilt) && (this.options.hexBuilder != null)) {
         $("#" + this.options.elementId).remove();
-        this.options.hexBuilder.buildBoxes(this.options.elementId, this.options.svg, [0, this.options.size], this.options.xPos);
+        this.rootGroup = this.options.hexBuilder.buildBoxes(this.options.elementId, this.options.svg, [0, this.options.size], this.options.xPos);
         this.isBuilt = true;
       }
       if (this.options.value !== this.lastValue) {

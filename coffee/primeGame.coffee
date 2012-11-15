@@ -38,19 +38,33 @@ $.widget( "stults.primeGame", {
 			elementId: @.options.elementId + "Goal"
 			svg: @.options.svg
 			#position is just hacked in for now.
-			xPos: 375
+			xPos: 450
 			size: @.options.size*2
 			value: @.options.goalValue
 			hexBuilder: @.options.hexBuilder
+		})
+		@goalDecoration = $("<div></div>").appendTo(@.element).decorationBox({
+			elementId: @.options.elementId + "ResultDecoration"
+			element: @goal
+			svg: @.options.svg
+			title: "Goal"
+			value: @goal.boxLine("option", "value")
 		})
 		@result = $("<div></div>").appendTo(@.element).boxLine({
 			elementId: @.options.elementId + "Result"
 			svg: @.options.svg
 			#position is just hacked in for now.
-			xPos: 325
+			xPos: 350
 			size: @.options.size*2
 			value: 0
 			hexBuilder: @.options.hexBuilder
+		})
+		@resultDecoration = $("<div></div>").appendTo(@.element).decorationBox({
+			elementId: @.options.elementId + "ResultDecoration"
+			element: @result
+			svg: @.options.svg
+			title: "Result"
+			value: 0
 		})
 		@grid = $("<div></div>").appendTo(@.element).hexGrid({
 			elementId: @.options.elementId + "Board"
@@ -58,6 +72,7 @@ $.widget( "stults.primeGame", {
 			hexBuilder: @.options.hexBuilder
 			update: (event, data) ->
 				that.result.boxLine("option", "value", data.value)
+				that.resultDecoration.decorationBox("option", "value", data.value)
 		})
 		@rhs = $("<div></div>").appendTo(@.element).hexLine({
 			elementId: @.options.elementId + "Rhs"

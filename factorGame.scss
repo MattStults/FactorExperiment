@@ -34,14 +34,6 @@ text {
 		@include vendor-prefix(animation-name, glowBright);
 		fill: $selectBright;
 	}
-}
-#gameGoal{
-	@extend #gameResult;
-}
-#gameLhs{
-	@extend #gameResult;
-	stroke: $lineWhite;
-	stroke-width: 2;
   > g > text {
     fill: $selectBright;
     stroke: none;
@@ -50,6 +42,14 @@ text {
     fill: white;
     stroke: none;
   }
+}
+#gameGoal{
+	@extend #gameResult;
+}
+#gameLhs{
+	@extend #gameResult;
+	stroke: $lineWhite;
+	stroke-width: 2;
 	
 }
 #gameRhs{

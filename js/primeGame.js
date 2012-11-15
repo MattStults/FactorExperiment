@@ -46,25 +46,40 @@
       this.goal = $("<div></div>").appendTo(this.element).boxLine({
         elementId: this.options.elementId + "Goal",
         svg: this.options.svg,
-        xPos: 375,
+        xPos: 450,
         size: this.options.size * 2,
         value: this.options.goalValue,
         hexBuilder: this.options.hexBuilder
       });
+      this.goalDecoration = $("<div></div>").appendTo(this.element).decorationBox({
+        elementId: this.options.elementId + "ResultDecoration",
+        element: this.goal,
+        svg: this.options.svg,
+        title: "Goal",
+        value: this.goal.boxLine("option", "value")
+      });
       this.result = $("<div></div>").appendTo(this.element).boxLine({
         elementId: this.options.elementId + "Result",
         svg: this.options.svg,
-        xPos: 325,
+        xPos: 350,
         size: this.options.size * 2,
         value: 0,
         hexBuilder: this.options.hexBuilder
+      });
+      this.resultDecoration = $("<div></div>").appendTo(this.element).decorationBox({
+        elementId: this.options.elementId + "ResultDecoration",
+        element: this.result,
+        svg: this.options.svg,
+        title: "Result",
+        value: 0
       });
       this.grid = $("<div></div>").appendTo(this.element).hexGrid({
         elementId: this.options.elementId + "Board",
         svg: this.options.svg,
         hexBuilder: this.options.hexBuilder,
         update: function(event, data) {
-          return that.result.boxLine("option", "value", data.value);
+          that.result.boxLine("option", "value", data.value);
+          return that.resultDecoration.decorationBox("option", "value", data.value);
         }
       });
       this.rhs = $("<div></div>").appendTo(this.element).hexLine({

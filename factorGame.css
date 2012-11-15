@@ -20,16 +20,16 @@ text {
     -o-animation-name: glowBright;
     -ms-animation-name: glowBright;
     fill: #8080ff; }
+  #gameResult > g > text, #gameGoal > g > text, #gameLhs > g > text, #gameRhs > g > text {
+    fill: #8080ff;
+    stroke: none; }
+  #gameResult > g.select > text, #gameGoal > g.select > text, #gameLhs > g.select > text, #gameRhs > g.select > text {
+    fill: white;
+    stroke: none; }
 
 #gameLhs, #gameRhs {
   stroke: white;
   stroke-width: 2; }
-  #gameLhs > g > text, #gameRhs > g > text {
-    fill: #8080ff;
-    stroke: none; }
-  #gameLhs > g.select > text, #gameRhs > g.select > text {
-    fill: white;
-    stroke: none; }
 
 svg {
   background: #000040; }

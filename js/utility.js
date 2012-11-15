@@ -18,6 +18,13 @@
       }
     };
 
+    util.drawTextAtPoint = function(svg, parent, pos, text) {
+      var bound;
+      text = svg.text(parent, text);
+      bound = text.getBBox();
+      return $(text).attr("x", pos[0] - bound.width / 2).attr("y", pos[1] + bound.height / 4);
+    };
+
     return util;
 
   })();
