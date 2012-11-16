@@ -100,6 +100,13 @@
           return that.grid.hexGrid("option", "lhs", data.value);
         }
       });
+      this.gridHover = $("<div></div>").appendTo(this.element).gridHover({
+        element: this.grid,
+        lhs: this.lhs,
+        rhs: this.rhs,
+        elementId: "gridHover",
+        svg: this.options.svg
+      });
       return this.refresh();
     }
   });

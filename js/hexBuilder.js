@@ -45,7 +45,7 @@
       gridGroup = svg.group(null, id);
       for (x = _i = _ref = start[0], _ref1 = dimensions[0] + start[0]; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; x = _ref <= _ref1 ? ++_i : --_i) {
         for (y = _j = _ref2 = start[1], _ref3 = dimensions[1] + start[1]; _ref2 <= _ref3 ? _j < _ref3 : _j > _ref3; y = _ref2 <= _ref3 ? ++_j : --_j) {
-          hexGroup = svg.group(gridGroup, id + ((x - start[0]) + dimensions[0] * (y - start[1])));
+          hexGroup = svg.group(gridGroup);
           _ref4 = HexBuilder._gridPlot([x, y], this.origin, this.width, this.yOffset), posX = _ref4[0], posY = _ref4[1];
           row = x + y - (start[0] + start[1]);
           $(hexGroup).addClass("x" + (x - start[0])).addClass("y" + (y - start[1])).addClass("row" + row);

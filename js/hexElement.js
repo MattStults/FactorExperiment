@@ -38,6 +38,29 @@
       }
       return factor;
     },
+    setClass: function(axis, value, cssClass) {
+      var selection;
+      selection = $("#" + this.options.elementId).children().filter($("." + axis + value));
+      return selection.addClass(cssClass);
+    },
+    clearClass: function(cssClass) {
+      return $("#" + this.options.elementId).children().removeClass(cssClass);
+    },
+    addCallback: function(eventId, callback) {
+      return $("#" + this.options.elementId).children().on(eventId, function(event) {
+        var classes, identity;
+        classes = ($(this).attr('class')).split(' ');
+        identity = classes.reduce(function(x, y) {
+          var parts;
+          parts = /(\D+)(\d+)/.exec(y);
+          if ((parts != null) && parts.length > 2) {
+            x[parts[1]] = parts[2];
+          }
+          return x;
+        }, {});
+        return callback(event, identity);
+      });
+    },
     _getSelectedTagsById: function(value, id) {
       var deselect, i, select, tag, _i, _ref;
       select = [];
@@ -123,10 +146,8 @@
     _setupClickResponse: function() {
       var that;
       that = this;
-      return $("#" + this.options.elementId).children().on('click', function(event) {
-        var index;
-        index = this.id.split(that.options.elementId)[1];
-        that.options.value = that.options.value ^ (1 << index);
+      return this.addCallback('click', function(event, tags) {
+        that.options.value = that.options.value ^ (1 << tags.row);
         return that.refresh();
       });
     },

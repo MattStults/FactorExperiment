@@ -25,6 +25,24 @@ $.widget( "stults.hexElement", {
 		if factor > max then return max
 		return factor
 
+	setClass: (axis, value, cssClass) ->
+		selection = $("#"+@.options.elementId).children().filter($("."+axis+value))
+		selection.addClass(cssClass)
+
+	clearClass: (cssClass) ->
+		$("#"+@.options.elementId).children().removeClass(cssClass)
+
+	addCallback: (eventId, callback) ->
+		$("#"+@.options.elementId).children().on(eventId, (event)->
+			classes = ($(@).attr('class')).split(' ')
+			identity = classes.reduce (x, y) ->
+				parts = /(\D+)(\d+)/.exec y
+				if parts? and parts.length > 2 then x[parts[1]] = parts[2]
+				x
+			, {}
+
+			callback(event, identity))
+
 	_getSelectedTagsById: (value, id) ->
 		select = []
 		deselect = []
@@ -97,9 +115,8 @@ $.widget( "stults.hexLine", $.stults.hexElement, {
 
 	_setupClickResponse: () ->
 		that = @
-		$("#"+@.options.elementId).children().on('click', (event) ->
-			index = @.id.split(that.options.elementId)[1]	#seems like a hack.
-			that.options.value = that.options.value ^ (1 << index)
+		@.addCallback('click', (event, tags) ->
+			that.options.value = that.options.value ^ (1 << tags.row)
 			that.refresh()
 			)
 

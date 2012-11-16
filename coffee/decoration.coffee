@@ -19,6 +19,7 @@ $.widget( "stults.decoration", {
 		if not @.options.svg?
 			@.options.svg = @.element.svg('get')
 		if not @isBuilt? or not @isBuilt
+			@isBuilt = true;
 			@._build()
 
 	_create: () ->
@@ -28,6 +29,41 @@ $.widget( "stults.decoration", {
 		@.refresh()
 	}
 )
+
+$.widget( "stults.gridHover", $.stults.decoration, {
+	options: {
+		lhs: null
+		rhs: null
+	}
+
+	_build: () ->
+		that = @
+		@.options.element.hexGrid('addCallback', 'mouseenter', (event, tags) ->
+			that.options.element.hexGrid("setClass", "x", tags.x, "hover")
+			that.options.element.hexGrid("setClass", "y", tags.y, "hover")
+			that.options.lhs.hexLine("setClass", "row", tags.x, "hover")
+			that.options.rhs.hexLine("setClass", "row", tags.y, "hover")
+			)
+		@.options.element.hexGrid('addCallback', 'mouseleave', (event, tags) ->
+			that.options.element.hexGrid("clearClass", "hover")
+			that.options.lhs.hexLine("clearClass", "hover")
+			that.options.rhs.hexLine("clearClass", "hover")
+			)
+		@.options.element.hexGrid('addCallback', 'click', (event, tags) ->
+			x = that.options.lhs.hexLine("option", "value")
+			xBit = 1 << tags.x
+			y = that.options.rhs.hexLine("option", "value")
+			yBit = 1 << tags.y
+			if (x & xBit) is 0 or (y & yBit) is 0
+				x |= xBit
+				y |= yBit
+			else
+				x &= ~xBit
+				y &= ~yBit
+			that.options.lhs.hexLine("option", "value", x)
+			that.options.rhs.hexLine("option", "value", y)
+			)
+	})
 
 $.widget( "stults.decorationBox", $.stults.decoration,{
 	options: {

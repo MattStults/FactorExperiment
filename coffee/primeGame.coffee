@@ -90,6 +90,13 @@ $.widget( "stults.primeGame", {
 			update: (event, data) ->
 				that.grid.hexGrid("option", "lhs", data.value);
 		})
+		@gridHover = $("<div></div>").appendTo(@.element).gridHover({
+			element: @grid
+			lhs: @lhs
+			rhs: @rhs
+			elementId: "gridHover"
+			svg: @.options.svg
+		})
 		@.refresh()
 	}
 )

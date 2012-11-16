@@ -23,6 +23,7 @@
         this.options.svg = this.element.svg('get');
       }
       if (!(this.isBuilt != null) || !this.isBuilt) {
+        this.isBuilt = true;
         return this._build();
       }
     },
@@ -32,6 +33,44 @@
         this.element.svg();
       }
       return this.refresh();
+    }
+  });
+
+  $.widget("stults.gridHover", $.stults.decoration, {
+    options: {
+      lhs: null,
+      rhs: null
+    },
+    _build: function() {
+      var that;
+      that = this;
+      this.options.element.hexGrid('addCallback', 'mouseenter', function(event, tags) {
+        that.options.element.hexGrid("setClass", "x", tags.x, "hover");
+        that.options.element.hexGrid("setClass", "y", tags.y, "hover");
+        that.options.lhs.hexLine("setClass", "row", tags.x, "hover");
+        return that.options.rhs.hexLine("setClass", "row", tags.y, "hover");
+      });
+      this.options.element.hexGrid('addCallback', 'mouseleave', function(event, tags) {
+        that.options.element.hexGrid("clearClass", "hover");
+        that.options.lhs.hexLine("clearClass", "hover");
+        return that.options.rhs.hexLine("clearClass", "hover");
+      });
+      return this.options.element.hexGrid('addCallback', 'click', function(event, tags) {
+        var x, xBit, y, yBit;
+        x = that.options.lhs.hexLine("option", "value");
+        xBit = 1 << tags.x;
+        y = that.options.rhs.hexLine("option", "value");
+        yBit = 1 << tags.y;
+        if ((x & xBit) === 0 || (y & yBit) === 0) {
+          x |= xBit;
+          y |= yBit;
+        } else {
+          x &= ~xBit;
+          y &= ~yBit;
+        }
+        that.options.lhs.hexLine("option", "value", x);
+        return that.options.rhs.hexLine("option", "value", y);
+      });
     }
   });
 

@@ -50,7 +50,6 @@ text {
 	@extend #gameResult;
 	stroke: $lineWhite;
 	stroke-width: 2;
-	
 }
 #gameRhs{
 	@extend #gameLhs;
