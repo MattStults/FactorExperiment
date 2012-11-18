@@ -25,12 +25,15 @@ $.widget( "stults.hexElement", {
 		if factor > max then return max
 		return factor
 
-	setClass: (axis, value, cssClass) ->
-		selection = $("#"+@.options.elementId).children().filter($("."+axis+value))
-		selection.addClass(cssClass)
+	getChildren: () ->
+		$("#"+@.options.elementId).children()
 
-	clearClass: (cssClass) ->
-		$("#"+@.options.elementId).children().removeClass(cssClass)
+	setClass: (axis, value, cssClass...) ->
+		selection = $("#"+@.options.elementId).children().filter($("."+axis+value))
+		selection.addClass(cssClass.join(" "))
+
+	clearClass: (cssClass...) ->
+		$("#"+@.options.elementId).children().removeClass(cssClass.join(" "))
 
 	addCallback: (eventId, callback) ->
 		$("#"+@.options.elementId).children().on(eventId, (event)->
@@ -73,15 +76,17 @@ $.widget( "stults.hexGrid", $.stults.hexElement, {
 	}
 
 	_setOption: (key, value) ->
-		if key is 'lhs' or key is 'rhs' then value = $.stults.hexElement.prototype._constrainFactor( value )
+		if key is 'lhs' or key is 'rhs'
+			value = $.stults.hexElement.prototype._constrainFactor( value )
+			@isChanged = true
 		@._super( key, value)
 
 	_updateBoard: (lhs, rhs) ->
+		$("#"+@.options.elementId).children().removeClass("selectX selectY")
 		[xSelect, xDeselect] = @._getSelectedTagsById(lhs, ".x")
+		$("#"+@.options.elementId).children().filter($(xSelect.join(","))).addClass("selectX")
 		[ySelect, yDeselect] = @._getSelectedTagsById(rhs, ".y")
-		$("#"+@.options.elementId).children().filter($(xSelect.join(","))).filter($(ySelect.join(","))).addClass("select")
-		$("#"+@.options.elementId).children().filter($(xDeselect.concat(yDeselect).join(","))).removeClass("select")
-
+		$("#"+@.options.elementId).children().filter($(ySelect.join(","))).addClass("selectY")
 	refresh: ->
 		@._super('refresh')
 		
@@ -90,11 +95,10 @@ $.widget( "stults.hexGrid", $.stults.hexElement, {
 			@.options.hexBuilder.buildGrid(@.options.elementId, @.options.svg, [0,0], [@.options.size, @.options.size])
 			@isBuilt = true
 
-		value = (@.options.lhs * @.options.rhs)
-		if value isnt @lastValue
-			@lastValue = value
+		if @isChanged? and @isChanged
+			@isChanged = false
 			@._updateBoard(@.options.lhs, @.options.rhs)
-			@._trigger( "update", null, {value: value})
+			@._trigger( "update", null, {value: @.options.lhs * @.options.rhs})
 	}
 )
 

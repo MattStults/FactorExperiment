@@ -34,35 +34,100 @@ $.widget( "stults.gridHover", $.stults.decoration, {
 	options: {
 		lhs: null
 		rhs: null
+		statusTags: ["on", "off"]
 	}
+
+	_buildLine: (group, positions) ->
+		[first, mid..., last] = positions
+		@.options.svg.line(group, first.x, first.y, last.x, last.y)
+
+	getChildren: () ->
+		$("#"+@.options.elementId).children()
+
+	_getGridPositions: (hexes, size) ->
+		rows = []
+		cols = []
+		for i in [0...size]
+			rows[i] = []
+			cols[i] = []
+		for i in [0...size]
+			for j in [0...size]
+				pos = util.getElemCenter(hexes.filter($(".x" + i)).filter($(".y"+j))[0])
+				rows[i][j] = pos
+				cols[j][i] = pos
+		[rows, cols]
+
+	_setupLines: (grid) ->
+		hexes = @.options.element.hexGrid("getChildren")
+		size = @.options.element.hexGrid("option", "size")
+		[rows, cols] = @._getGridPositions(hexes, size)
+		lineGroup = @.options.svg.group(null, @.options.elementId)
+
+		lhs = @.options.lhs.hexLine("getChildren")
+		rhs = @.options.rhs.hexLine("getChildren")
+		for i in [0...size]
+			cols[i] = [util.getElemCenter(rhs.filter($(".row" + i))[0])].concat cols[i]
+			rows[i] = [util.getElemCenter(lhs.filter($(".row" + i))[0])].concat rows[i]
+
+		$(@._buildLine(lineGroup, row)).addClass("x"+i) for row, i in rows
+		$(@._buildLine(lineGroup, col)).addClass("y"+i) for col, i in cols
+
+	_isTurnOn: (tags) ->
+		x = @.options.lhs.hexLine("option", "value")
+		y = @.options.rhs.hexLine("option", "value")
+		xBit = 1 << tags.x
+		yBit = 1 << tags.y
+		[(x & xBit) is 0 or (y & yBit) is 0,
+		x, xBit,
+		y, yBit]
+
+	_getStatusClass: (tags) ->
+		if @._isTurnOn(tags)[0] then @.options.statusTags[0] else @.options.statusTags[1]
+
+	_removeHover: (tags) ->
+		toRemove = ["hover", "hoverX", "hoverY"].concat(@.options.statusTags)
+		@.options.element.hexGrid("clearClass", toRemove...)
+		@.options.lhs.hexLine("clearClass", toRemove...)
+		@.options.rhs.hexLine("clearClass", toRemove...)
+		@.getChildren().removeClass("hover")
+
+	_addHover: (tags) ->
+		status = @._getStatusClass(tags)
+		@.options.element.hexGrid("setClass", "x", tags.x, "hoverX", status)
+		@.options.element.hexGrid("setClass", "y", tags.y, "hoverY", status)
+		@.options.lhs.hexLine("setClass", "row", tags.x, "hover", status)
+		@.options.rhs.hexLine("setClass", "row", tags.y, "hover", status)
+		lines = @.getChildren()
+		lines.filter($(".x"+tags.x)).addClass("hover")
+		lines.filter($(".y"+tags.y)).addClass("hover")
+
+	_select: (tags) ->
+		@._removeHover(tags)
+		[isTurnOn, x, xBit, y, yBit] = @._isTurnOn(tags)
+		if isTurnOn
+			x |= xBit
+			y |= yBit
+		else
+			x &= ~xBit
+			y &= ~yBit
+		@.options.lhs.hexLine("option", "value", x)
+		@.options.rhs.hexLine("option", "value", y)
+		
+		@._addHover(tags)
+		
 
 	_build: () ->
 		that = @
 		@.options.element.hexGrid('addCallback', 'mouseenter', (event, tags) ->
-			that.options.element.hexGrid("setClass", "x", tags.x, "hover")
-			that.options.element.hexGrid("setClass", "y", tags.y, "hover")
-			that.options.lhs.hexLine("setClass", "row", tags.x, "hover")
-			that.options.rhs.hexLine("setClass", "row", tags.y, "hover")
+			that._addHover(tags)
 			)
 		@.options.element.hexGrid('addCallback', 'mouseleave', (event, tags) ->
-			that.options.element.hexGrid("clearClass", "hover")
-			that.options.lhs.hexLine("clearClass", "hover")
-			that.options.rhs.hexLine("clearClass", "hover")
+			that._removeHover(tags)
 			)
 		@.options.element.hexGrid('addCallback', 'click', (event, tags) ->
-			x = that.options.lhs.hexLine("option", "value")
-			xBit = 1 << tags.x
-			y = that.options.rhs.hexLine("option", "value")
-			yBit = 1 << tags.y
-			if (x & xBit) is 0 or (y & yBit) is 0
-				x |= xBit
-				y |= yBit
-			else
-				x &= ~xBit
-				y &= ~yBit
-			that.options.lhs.hexLine("option", "value", x)
-			that.options.rhs.hexLine("option", "value", y)
+			that._select(tags)
 			)
+		@._setupLines()
 	})
 
 $.widget( "stults.decorationBox", $.stults.decoration,{

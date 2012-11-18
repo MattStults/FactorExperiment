@@ -10,3 +10,10 @@ class root.util
 		bound = text.getBBox()
 		$(text).attr("x", pos[0] - bound.width/2).attr("y",pos[1] + bound.height/4)
 
+	@getElemCenter: (elem) ->
+		bbox = elem.getBBox()
+		{
+			x: bbox.x + bbox.width/2
+			y: bbox.y + bbox.height/2
+		}
+

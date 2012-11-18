@@ -1,5 +1,11 @@
 text {
-  font-weight: bold; }
+  font-weight: bold;
+  pointer-events: none; }
+
+line {
+  pointer-events: none;
+  stroke-width: 0;
+  stroke: none; }
 
 #gameBoard {
   fill: rgba(0, 0, 64, 0);
@@ -7,18 +13,13 @@ text {
   #gameBoard > g > text {
     fill: #0000ba;
     stroke: none; }
-  #gameBoard > g.select > text {
+  #gameBoard > g.selectX.selectY > text {
     fill: #8080ff;
     stroke: none; }
 
 #gameResult, #gameGoal, #gameLhs, #gameRhs {
   fill: #0000a0; }
-  #gameResult > .select, #gameGoal > .select, #gameLhs > .select, #gameRhs > .select {
-    animation-name: glowBright;
-    -moz-animation-name: glowBright;
-    -webkit-animation-name: glowBright;
-    -o-animation-name: glowBright;
-    -ms-animation-name: glowBright;
+  #gameResult > .select:not(.off), #gameGoal > .select:not(.off), #gameLhs > .select:not(.off), #gameRhs > .select:not(.off) {
     fill: #8080ff; }
   #gameResult > g > text, #gameGoal > g > text, #gameLhs > g > text, #gameRhs > g > text {
     fill: #8080ff;
@@ -34,28 +35,32 @@ text {
 svg {
   background: #000040; }
 
-.select {
+.selectX.selectY {
   fill: blue;
-  animation-name: glow;
-  -moz-animation-name: glow;
-  -webkit-animation-name: glow;
-  -o-animation-name: glow;
-  -ms-animation-name: glow;
-  animation-duration: 5s;
-  -moz-animation-duration: 5s;
-  -webkit-animation-duration: 5s;
-  -o-animation-duration: 5s;
-  -ms-animation-duration: 5s;
-  animation-iteration-count: infinite;
-  -moz-animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite;
-  -o-animation-iteration-count: infinite;
-  -ms-animation-iteration-count: infinite;
-  animation-direction: alternate;
-  -moz-animation-direction: alternate;
-  -webkit-animation-direction: alternate;
-  -o-animation-direction: alternate;
-  -ms-animation-direction: alternate; }
+  /*@include vendor-prefix(animation-name, glow);
+  @include vendor-prefix(animation-duration, 5s);
+  @include vendor-prefix(animation-iteration-count, infinite);
+  @include vendor-prefix(animation-direction, alternate);*/ }
+
+.selectX.hoverY.on:not(.selectY), .hoverX.hoverY.on:not(.selectY), .selectY.hoverX.on:not(.selectX), .hover.on:not(.select) {
+  fill: green; }
+
+.selectX.selectY.hoverY.off, .selectX.selectY.hoverX.off, g.hover.select.off {
+  fill: red; }
+
+#gridHover > line.hover {
+  stroke-width: 25;
+  stroke: rgba(255, 255, 255, 0.2);
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  transition-delay: 0.75s;
+  -moz-transition-delay: 0.75s;
+  -webkit-transition-delay: 0.75s;
+  -o-transition-delay: 0.75s;
+  -ms-transition-delay: 0.75s; }
 
 .row0 {
   transition: 0.2s;

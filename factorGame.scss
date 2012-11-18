@@ -14,6 +14,12 @@ $selectBright: lighten(blue, 25%);
 }
 text {
   font-weight:bold;
+  pointer-events: none;
+}
+line {
+  pointer-events: none;
+  stroke-width: 0;
+  stroke: none;
 }
 
 #gameBoard {
@@ -23,15 +29,15 @@ text {
     fill: $darkLine;
     stroke: none;
   }
-  > g.select > text {
+  > g.selectX.selectY > text {
     fill: $selectBright;
     stroke: none;
   }
 }
 #gameResult{
 	fill: $unselect;
-	> .select {
-		@include vendor-prefix(animation-name, glowBright);
+	> .select:not(.off) {
+		//@include vendor-prefix(animation-name, glowBright);
 		fill: $selectBright;
 	}
   > g > text {
@@ -58,15 +64,45 @@ svg{
 	background: $backBlue;
 }
 
-.select{
+.selectX.selectY{
 	//in case animation isn't supported
 	fill: $select;
 	//animation
-	@include vendor-prefix(animation-name, glow);
+	/*@include vendor-prefix(animation-name, glow);
 	@include vendor-prefix(animation-duration, 5s);
 	@include vendor-prefix(animation-iteration-count, infinite);
-	@include vendor-prefix(animation-direction, alternate);
+	@include vendor-prefix(animation-direction, alternate);*/
 }
+
+.selectX.hoverY.on:not(.selectY){
+  fill:green;
+}
+.hoverX.hoverY.on:not(.selectY){
+  @extend .selectX.hoverY.on:not(.selectY);
+}
+.selectY.hoverX.on:not(.selectX){
+  @extend .selectX.hoverY.on:not(.selectY);
+}
+.hover.on:not(.select) {
+  @extend .selectX.hoverY.on:not(.selectY);
+}
+.selectX.selectY.hoverY.off{
+  fill:red;
+}
+.selectX.selectY.hoverX.off{
+  @extend .selectX.selectY.hoverY.off;
+}
+g.hover.select.off{
+  @extend .selectX.selectY.hoverY.off;
+}
+
+#gridHover > line.hover{
+  stroke-width: 25;
+  stroke: rgba(#ffffff, 0.2);
+  @include vendor-prefix(transition, 0.5s);
+  @include vendor-prefix(transition-delay, 0.75s);
+}
+
 
 $rows: 10;
 $rowDelayDelta: 0.03;
