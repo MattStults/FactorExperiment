@@ -23,7 +23,8 @@
         hex = svg.polygon(defs, HexBuilder._buildHexLine(this.height, this.width, this.sideLength));
         $(hex).attr('id', "hexagon");
         square = svg.polygon(defs, HexBuilder._buildSquareLine(this.sideLength));
-        return $(square).attr('id', "resultBox");
+        $(square).attr('id', "resultBox");
+        return this.root = svg.group(null, "game");
       }
     };
 
@@ -37,12 +38,12 @@
       var startX, startY, stopX, stopY, _ref, _ref1;
       _ref = HexBuilder._gridPlot(start, this.origin, this.width, this.yOffset), startX = _ref[0], startY = _ref[1];
       _ref1 = HexBuilder._gridPlot(stop, this.origin, this.width, this.yOffset), stopX = _ref1[0], stopY = _ref1[1];
-      return svg.line(null, startX, startY, stopX, stopY);
+      return svg.line(this.root, startX, startY, stopX, stopY);
     };
 
     HexBuilder.prototype.buildGrid = function(id, svg, start, dimensions) {
       var gridGroup, hex, hexGroup, posX, posY, row, x, y, _i, _j, _ref, _ref1, _ref2, _ref3, _ref4;
-      gridGroup = svg.group(null, id);
+      gridGroup = svg.group(this.root, id);
       for (x = _i = _ref = start[0], _ref1 = dimensions[0] + start[0]; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; x = _ref <= _ref1 ? ++_i : --_i) {
         for (y = _j = _ref2 = start[1], _ref3 = dimensions[1] + start[1]; _ref2 <= _ref3 ? _j < _ref3 : _j > _ref3; y = _ref2 <= _ref3 ? ++_j : --_j) {
           hexGroup = svg.group(gridGroup);
@@ -58,7 +59,7 @@
 
     HexBuilder.prototype.buildBoxes = function(id, svg, range, xPos) {
       var box, boxGroup, group, ignore, posY, y, _i, _ref, _ref1, _ref2;
-      group = svg.group(null, id);
+      group = svg.group(this.root, id);
       for (y = _i = _ref = range[0], _ref1 = range[1]; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; y = _ref <= _ref1 ? ++_i : --_i) {
         _ref2 = HexBuilder._gridPlot([0, y], this.origin, this.width, this.yOffset), ignore = _ref2[0], posY = _ref2[1];
         boxGroup = svg.group(group, id + y);

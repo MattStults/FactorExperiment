@@ -48,19 +48,30 @@ svg {
 .selectX.selectY.hoverY.off, .selectX.selectY.hoverX.off, g.hover.select.off {
   fill: red; }
 
-#gridHover > line.hover {
+#gridHover > .hover {
   stroke-width: 25;
   stroke: rgba(255, 255, 255, 0.2);
+  stroke-dasharray: none;
   transition: 0.5s;
   -moz-transition: 0.5s;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
-  -ms-transition: 0.5s;
-  transition-delay: 0.75s;
-  -moz-transition-delay: 0.75s;
-  -webkit-transition-delay: 0.75s;
-  -o-transition-delay: 0.75s;
-  -ms-transition-delay: 0.75s; }
+  -ms-transition: 0.5s; }
+
+#gridHover > .display {
+  stroke-width: 5;
+  stroke-dasharray: 9, 5;
+  stroke: rgba(255, 255, 255, 0.3);
+  transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -webkit-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s; }
 
 .row0 {
   transition: 0.2s;

@@ -158,6 +158,9 @@
         return that.refresh();
       });
     },
+    getSelected: function(id) {
+      return this._getSelectedTagsById(this.options.value, id);
+    },
     refresh: function() {
       var dimensions, origin, _ref;
       this._super('refresh');

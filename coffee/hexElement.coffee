@@ -124,6 +124,9 @@ $.widget( "stults.hexLine", $.stults.hexElement, {
 			that.refresh()
 			)
 
+	getSelected: (id) ->
+		@._getSelectedTagsById(@.options.value, id)
+
 	refresh: ->
 		@._super('refresh')
 		

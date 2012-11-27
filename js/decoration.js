@@ -44,9 +44,13 @@
       statusTags: ["on", "off"]
     },
     _buildLine: function(group, positions) {
-      var first, last, mid, _i;
-      first = positions[0], mid = 3 <= positions.length ? __slice.call(positions, 1, _i = positions.length - 1) : (_i = 1, []), last = positions[_i++];
-      return this.options.svg.line(group, first.x, first.y, last.x, last.y);
+      var first, last, mid, offset, second, _i;
+      first = positions[0], second = positions[1], mid = 4 <= positions.length ? __slice.call(positions, 2, _i = positions.length - 1) : (_i = 2, []), last = positions[_i++];
+      offset = {
+        x: (second.x - first.x) / 2,
+        y: (second.y - first.y) / 2
+      };
+      return this.options.svg.line(group, first.x + offset.x, first.y + offset.y, last.x + offset.x, last.y + offset.y);
     },
     getChildren: function() {
       return $("#" + this.options.elementId).children();
@@ -106,51 +110,102 @@
         return this.options.statusTags[1];
       }
     },
-    _removeHover: function(tags) {
-      var toRemove, _ref, _ref1, _ref2;
-      toRemove = ["hover", "hoverX", "hoverY"].concat(this.options.statusTags);
-      (_ref = this.options.element).hexGrid.apply(_ref, ["clearClass"].concat(__slice.call(toRemove)));
-      (_ref1 = this.options.lhs).hexLine.apply(_ref1, ["clearClass"].concat(__slice.call(toRemove)));
-      (_ref2 = this.options.rhs).hexLine.apply(_ref2, ["clearClass"].concat(__slice.call(toRemove)));
-      return this.getChildren().removeClass("hover");
+    _removeHover: function() {
+      var toRemove;
+      toRemove = ["hover", "hoverX", "hoverY", "display"].concat(this.options.statusTags);
+      $("#" + this.options.element.hexGrid("option", "elementId")).children().removeClass(toRemove.join(" "));
+      $("#" + this.options.lhs.hexLine("option", "elementId")).children().removeClass(toRemove.join(" "));
+      $("#" + this.options.rhs.hexLine("option", "elementId")).children().removeClass(toRemove.join(" "));
+      return $("#" + this.options.elementId).children().removeClass(toRemove.join(" "));
+    },
+    _updateHover: function(elementId, selects, classIds) {
+      var classesToAdd, pool, sSelector;
+      pool = $("#" + elementId);
+      sSelector = pool.find(selects.length > 0 ? $("." + selects.join(",.")) : "");
+      classesToAdd = classIds.join(" ");
+      pool.children().not(sSelector).removeClass(classesToAdd);
+      return sSelector.addClass(classesToAdd);
     },
     _addHover: function(tags) {
-      var lines, status;
+      var gridId, ignore, selectedLines, selectedXLines, selectedYLines, status, _ref, _ref1;
       status = this._getStatusClass(tags);
-      this.options.element.hexGrid("setClass", "x", tags.x, "hoverX", status);
-      this.options.element.hexGrid("setClass", "y", tags.y, "hoverY", status);
-      this.options.lhs.hexLine("setClass", "row", tags.x, "hover", status);
-      this.options.rhs.hexLine("setClass", "row", tags.y, "hover", status);
-      lines = this.getChildren();
-      lines.filter($(".x" + tags.x)).addClass("hover");
-      return lines.filter($(".y" + tags.y)).addClass("hover");
+      gridId = this.options.element.hexGrid("option", "elementId");
+      this._updateHover(gridId, ["x" + tags.x], ["hoverX"]).addClass(status);
+      this._updateHover(gridId, ["y" + tags.y], ["hoverY"]).addClass(status);
+      this._updateHover(this.options.lhs.hexLine("option", "elementId"), ["row" + tags.x], ["hover", status]);
+      this._updateHover(this.options.rhs.hexLine("option", "elementId"), ["row" + tags.y], ["hover", status]);
+      this._updateHover(this.options.elementId, ["x" + tags.x, "y" + tags.y], ["hover"]);
+      _ref = this.options.lhs.hexLine("getSelected", "x"), selectedXLines = _ref[0], ignore = _ref[1];
+      _ref1 = this.options.rhs.hexLine("getSelected", "y"), selectedYLines = _ref1[0], ignore = _ref1[1];
+      selectedLines = selectedXLines.concat(selectedYLines);
+      return this._updateHover(this.options.elementId, selectedLines, ["display"]);
     },
     _select: function(tags) {
       var isTurnOn, x, xBit, y, yBit, _ref;
-      this._removeHover(tags);
-      _ref = this._isTurnOn(tags), isTurnOn = _ref[0], x = _ref[1], xBit = _ref[2], y = _ref[3], yBit = _ref[4];
-      if (isTurnOn) {
-        x |= xBit;
-        y |= yBit;
-      } else {
-        x &= ~xBit;
-        y &= ~yBit;
+      this._removeHover();
+      if (tags.x >= 0 && tags.y >= 0) {
+        _ref = this._isTurnOn(tags), isTurnOn = _ref[0], x = _ref[1], xBit = _ref[2], y = _ref[3], yBit = _ref[4];
+        if (isTurnOn) {
+          x |= xBit;
+          y |= yBit;
+        } else {
+          x &= ~xBit;
+          y &= ~yBit;
+        }
+        this.options.lhs.hexLine("option", "value", x);
+        this.options.rhs.hexLine("option", "value", y);
       }
-      this.options.lhs.hexLine("option", "value", x);
-      this.options.rhs.hexLine("option", "value", y);
       return this._addHover(tags);
     },
+    _addClassCallback: function(selector, eventId, callback) {
+      return selector.on(eventId, function(event) {
+        var classes, identity;
+        classes = ($(this).attr('class')).split(' ');
+        identity = classes.reduce(function(x, y) {
+          var parts;
+          parts = /(\D+)(\d+)/.exec(y);
+          if ((parts != null) && parts.length > 2) {
+            x[parts[1]] = parts[2];
+          }
+          return x;
+        }, {});
+        return callback(event, identity);
+      });
+    },
     _build: function() {
-      var that;
+      var grid, lhs, rhs, that;
       that = this;
-      this.options.element.hexGrid('addCallback', 'mouseenter', function(event, tags) {
+      lhs = $("#" + this.options.lhs.hexLine("option", "elementId")).children();
+      this._addClassCallback(lhs, 'mouseenter', function(event, tags) {
+        tags.x = tags.row;
+        tags.y = -1;
         return that._addHover(tags);
       });
-      this.options.element.hexGrid('addCallback', 'mouseleave', function(event, tags) {
-        return that._removeHover(tags);
-      });
-      this.options.element.hexGrid('addCallback', 'click', function(event, tags) {
+      this._addClassCallback(lhs, 'click', function(event, tags) {
+        tags.x = tags.row;
+        tags.y = -1;
         return that._select(tags);
+      });
+      rhs = $("#" + this.options.rhs.hexLine("option", "elementId")).children();
+      this._addClassCallback(rhs, 'mouseenter', function(event, tags) {
+        tags.y = tags.row;
+        tags.x = -1;
+        return that._addHover(tags);
+      });
+      this._addClassCallback(rhs, 'click', function(event, tags) {
+        tags.y = tags.row;
+        tags.x = -1;
+        return that._select(tags);
+      });
+      grid = $("#" + this.options.element.hexGrid("option", "elementId")).children();
+      this._addClassCallback(grid, 'mouseenter', function(event, tags) {
+        return that._addHover(tags);
+      });
+      this._addClassCallback(grid, 'click', function(event, tags) {
+        return that._select(tags);
+      });
+      $("#game").on('mouseleave', function(event) {
+        return that._removeHover();
       });
       return this._setupLines();
     }

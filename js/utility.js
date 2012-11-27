@@ -30,7 +30,9 @@
       bbox = elem.getBBox();
       return {
         x: bbox.x + bbox.width / 2,
-        y: bbox.y + bbox.height / 2
+        y: bbox.y + bbox.height / 2,
+        width: bbox.width,
+        height: bbox.height
       };
     };
 

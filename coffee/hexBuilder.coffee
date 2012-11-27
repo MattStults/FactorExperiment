@@ -14,6 +14,7 @@ class root.HexBuilder
 			$(hex).attr('id', "hexagon")
 			square = svg.polygon(defs, HexBuilder._buildSquareLine(@sideLength))
 			$(square).attr('id', "resultBox")
+			@root = svg.group(null, "game")	#hack to get them all in the same group for now.
 
 	@_gridPlot: (pos, origin, width, yOffset) ->
 		[ origin[0] + (pos[0]-pos[1])*0.5*width, origin[1] + (pos[0]+pos[1])*yOffset ].map (coord) -> Math.round(coord*100)/100
@@ -21,10 +22,10 @@ class root.HexBuilder
 	buildLine: (id, svg, start, stop) ->
 		[startX, startY] = HexBuilder._gridPlot(start, @origin, @width, @yOffset)
 		[stopX, stopY] = HexBuilder._gridPlot(stop, @origin, @width, @yOffset)
-		svg.line(null, startX, startY, stopX, stopY);
+		svg.line(@root, startX, startY, stopX, stopY);
 
 	buildGrid: (id, svg, start, dimensions) ->
-		gridGroup = svg.group(null, id)
+		gridGroup = svg.group(@root, id)
 		for x in [start[0]...dimensions[0]+start[0]]
 			for y in [start[1]...dimensions[1]+start[1]]
 				hexGroup = svg.group(gridGroup)
@@ -39,7 +40,7 @@ class root.HexBuilder
 		gridGroup
 
 	buildBoxes: (id, svg, range, xPos) ->
-		group = svg.group(null, id)
+		group = svg.group(@root, id)
 		for y in [range[0]...range[1]]
 			[ignore, posY] = HexBuilder._gridPlot([0,y], @origin, @width, @yOffset)
 			boxGroup = svg.group(group, id+y)

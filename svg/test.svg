@@ -1,0 +1,369 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='744.09448' xmlns:xlink='http://www.w3.org/1999/xlink' height='1052.3622'>
+     <defs>
+          <path d='M 0.0,25.0 21.75,12.2 21.75,-12.2 0.0,-25.0 -21.75,-12.2 -21.75,12.2 Z' id='hexagon'/>
+          <g id='hexagon-row-0'>
+               <use xlink:href='#hexagon'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    1
+               </text>
+          </g>
+          <g id='hexagon-row-1'>
+               <use xlink:href='#hexagon'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    2
+               </text>
+          </g>
+          <g id='hexagon-row-2'>
+               <use xlink:href='#hexagon'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    4
+               </text>
+          </g>
+          <g id='hexagon-row-3'>
+               <use xlink:href='#hexagon'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    8
+               </text>
+          </g>
+          <g id='hexagon-row-4'>
+               <use xlink:href='#hexagon'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    16
+               </text>
+          </g>
+          <g id='hexagon-row-5'>
+               <use xlink:href='#hexagon'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    32
+               </text>
+          </g>
+          <g id='hexagon-row-6'>
+               <use xlink:href='#hexagon'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    64
+               </text>
+          </g>
+          <g id='hexagon-row-7'>
+               <use xlink:href='#hexagon'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    128
+               </text>
+          </g>
+          <g id='hexagon-row-8'>
+               <use xlink:href='#hexagon'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    256
+               </text>
+          </g>
+          <use xlink:href='#hexagon' id='lhs'/>
+          <g id='lhs-row-0'>
+               <use xlink:href='#lhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    1
+               </text>
+          </g>
+          <g id='lhs-row-1'>
+               <use xlink:href='#lhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    2
+               </text>
+          </g>
+          <g id='lhs-row-2'>
+               <use xlink:href='#lhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    4
+               </text>
+          </g>
+          <g id='lhs-row-3'>
+               <use xlink:href='#lhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    8
+               </text>
+          </g>
+          <g id='lhs-row-4'>
+               <use xlink:href='#lhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    16
+               </text>
+          </g>
+          <g id='lhs-row-5'>
+               <use xlink:href='#lhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    32
+               </text>
+          </g>
+          <g id='lhs-row-6'>
+               <use xlink:href='#lhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    64
+               </text>
+          </g>
+          <g id='lhs-row-7'>
+               <use xlink:href='#lhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    128
+               </text>
+          </g>
+          <g id='lhs-row-8'>
+               <use xlink:href='#lhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    256
+               </text>
+          </g>
+          <use xlink:href='#hexagon' id='rhs'/>
+          <g id='rhs-row-0'>
+               <use xlink:href='#rhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    1
+               </text>
+          </g>
+          <g id='rhs-row-1'>
+               <use xlink:href='#rhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    2
+               </text>
+          </g>
+          <g id='rhs-row-2'>
+               <use xlink:href='#rhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    4
+               </text>
+          </g>
+          <g id='rhs-row-3'>
+               <use xlink:href='#rhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    8
+               </text>
+          </g>
+          <g id='rhs-row-4'>
+               <use xlink:href='#rhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    16
+               </text>
+          </g>
+          <g id='rhs-row-5'>
+               <use xlink:href='#rhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    32
+               </text>
+          </g>
+          <g id='rhs-row-6'>
+               <use xlink:href='#rhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    64
+               </text>
+          </g>
+          <g id='rhs-row-7'>
+               <use xlink:href='#rhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    128
+               </text>
+          </g>
+          <g id='rhs-row-8'>
+               <use xlink:href='#rhs'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    256
+               </text>
+          </g>
+          <path d='M 12.2,12.2 12.2,-12.2 -12.2,-12.2 -12.2,12.2 Z' id='resultBox'/>
+          <g id='resultBox-row-0'>
+               <use xlink:href='#resultBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    1
+               </text>
+          </g>
+          <g id='resultBox-row-1'>
+               <use xlink:href='#resultBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    2
+               </text>
+          </g>
+          <g id='resultBox-row-2'>
+               <use xlink:href='#resultBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    4
+               </text>
+          </g>
+          <g id='resultBox-row-3'>
+               <use xlink:href='#resultBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    8
+               </text>
+          </g>
+          <g id='resultBox-row-4'>
+               <use xlink:href='#resultBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    16
+               </text>
+          </g>
+          <g id='resultBox-row-5'>
+               <use xlink:href='#resultBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    32
+               </text>
+          </g>
+          <g id='resultBox-row-6'>
+               <use xlink:href='#resultBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    64
+               </text>
+          </g>
+          <g id='resultBox-row-7'>
+               <use xlink:href='#resultBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    128
+               </text>
+          </g>
+          <g id='resultBox-row-8'>
+               <use xlink:href='#resultBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    256
+               </text>
+          </g>
+          <g id='resultBox-row-9'>
+               <use xlink:href='#resultBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    512
+               </text>
+          </g>
+          <use xlink:href='#resultBox' id='goalBox'/>
+          <g id='goalBox-row-0'>
+               <use xlink:href='#goalBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    1
+               </text>
+          </g>
+          <g id='goalBox-row-1'>
+               <use xlink:href='#goalBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    2
+               </text>
+          </g>
+          <g id='goalBox-row-2'>
+               <use xlink:href='#goalBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    4
+               </text>
+          </g>
+          <g id='goalBox-row-3'>
+               <use xlink:href='#goalBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    8
+               </text>
+          </g>
+          <g id='goalBox-row-4'>
+               <use xlink:href='#goalBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    16
+               </text>
+          </g>
+          <g id='goalBox-row-5'>
+               <use xlink:href='#goalBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    32
+               </text>
+          </g>
+          <g id='goalBox-row-6'>
+               <use xlink:href='#goalBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    64
+               </text>
+          </g>
+          <g id='goalBox-row-7'>
+               <use xlink:href='#goalBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    128
+               </text>
+          </g>
+          <g id='goalBox-row-8'>
+               <use xlink:href='#goalBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    256
+               </text>
+          </g>
+          <g id='goalBox-row-9'>
+               <use xlink:href='#goalBox'/>
+               <text style='text-anchor: middle; dominant-baseline: central;'>
+                    512
+               </text>
+          </g>
+     </defs>
+     <g id='factor'>
+          <use x='350.0' y='100.0' xlink:href='#hexagon-row-0' class='x0 y0 row0'/>
+          <use x='328.25' y='137.2' xlink:href='#hexagon-row-1' class='x0 y1 row1'/>
+          <use x='306.5' y='174.4' xlink:href='#hexagon-row-2' class='x0 y2 row2'/>
+          <use x='284.75' y='211.6' xlink:href='#hexagon-row-3' class='x0 y3 row3'/>
+          <use x='263.0' y='248.8' xlink:href='#hexagon-row-4' class='x0 y4 row4'/>
+          <use x='371.75' y='137.2' xlink:href='#hexagon-row-1' class='x1 y0 row1'/>
+          <use x='350.0' y='174.4' xlink:href='#hexagon-row-2' class='x1 y1 row2'/>
+          <use x='328.25' y='211.6' xlink:href='#hexagon-row-3' class='x1 y2 row3'/>
+          <use x='306.5' y='248.8' xlink:href='#hexagon-row-4' class='x1 y3 row4'/>
+          <use x='284.75' y='286.0' xlink:href='#hexagon-row-5' class='x1 y4 row5'/>
+          <use x='393.5' y='174.4' xlink:href='#hexagon-row-2' class='x2 y0 row2'/>
+          <use x='371.75' y='211.6' xlink:href='#hexagon-row-3' class='x2 y1 row3'/>
+          <use x='350.0' y='248.8' xlink:href='#hexagon-row-4' class='x2 y2 row4'/>
+          <use x='328.25' y='286.0' xlink:href='#hexagon-row-5' class='x2 y3 row5'/>
+          <use x='306.5' y='323.2' xlink:href='#hexagon-row-6' class='x2 y4 row6'/>
+          <use x='415.25' y='211.6' xlink:href='#hexagon-row-3' class='x3 y0 row3'/>
+          <use x='393.5' y='248.8' xlink:href='#hexagon-row-4' class='x3 y1 row4'/>
+          <use x='371.75' y='286.0' xlink:href='#hexagon-row-5' class='x3 y2 row5'/>
+          <use x='350.0' y='323.2' xlink:href='#hexagon-row-6' class='x3 y3 row6'/>
+          <use x='328.25' y='360.4' xlink:href='#hexagon-row-7' class='x3 y4 row7'/>
+          <use x='437.0' y='248.8' xlink:href='#hexagon-row-4' class='x4 y0 row4'/>
+          <use x='415.25' y='286.0' xlink:href='#hexagon-row-5' class='x4 y1 row5'/>
+          <use x='393.5' y='323.2' xlink:href='#hexagon-row-6' class='x4 y2 row6'/>
+          <use x='371.75' y='360.4' xlink:href='#hexagon-row-7' class='x4 y3 row7'/>
+          <use x='350.0' y='397.6' xlink:href='#hexagon-row-8' class='x4 y4 row8'/>
+     </g>
+     <g id='factor-lines'>
+          <line y1='81.4' y2='267.4' class='x0 row0' x1='360.875' x2='252.125'/>
+          <line y1='118.6' y2='304.6' class='x1 row1' x1='382.625' x2='273.875'/>
+          <line y1='155.8' y2='341.8' class='x2 row2' x1='404.375' x2='295.625'/>
+          <line y1='193.0' y2='379.0' class='x3 row3' x1='426.125' x2='317.375'/>
+          <line y1='230.2' y2='416.2' class='x4 row4' x1='447.875' x2='339.125'/>
+          <line y1='81.4' y2='267.4' class='y0 row0' x1='339.125' x2='447.875'/>
+          <line y1='118.6' y2='304.6' class='y1 row1' x1='317.375' x2='426.125'/>
+          <line y1='155.8' y2='341.8' class='y2 row2' x1='295.625' x2='404.375'/>
+          <line y1='193.0' y2='379.0' class='y3 row3' x1='273.875' x2='382.625'/>
+          <line y1='230.2' y2='416.2' class='y4 row4' x1='252.125' x2='360.875'/>
+     </g>
+     <g id='factor-lhs'>
+          <use x='371.75' y='62.8' xlink:href='#lhs-row-0' class='x0 y0 row0'/>
+          <use x='393.5' y='100.0' xlink:href='#lhs-row-1' class='x1 y0 row1'/>
+          <use x='415.25' y='137.2' xlink:href='#lhs-row-2' class='x2 y0 row2'/>
+          <use x='437.0' y='174.4' xlink:href='#lhs-row-3' class='x3 y0 row3'/>
+          <use x='458.75' y='211.6' xlink:href='#lhs-row-4' class='x4 y0 row4'/>
+     </g>
+     <g id='factor-rhs'>
+          <use x='328.25' y='62.8' xlink:href='#rhs-row-0' class='x0 y0 row0'/>
+          <use x='306.5' y='100.0' xlink:href='#rhs-row-1' class='x0 y1 row1'/>
+          <use x='284.75' y='137.2' xlink:href='#rhs-row-2' class='x0 y2 row2'/>
+          <use x='263.0' y='174.4' xlink:href='#rhs-row-3' class='x0 y3 row3'/>
+          <use x='241.25' y='211.6' xlink:href='#rhs-row-4' class='x0 y4 row4'/>
+     </g>
+     <g id='factor-result'>
+          <use x='350.0' y='100.0' xlink:href='#resultBox-row-0' class='x-1 y0 row0'/>
+          <use x='350.0' y='137.2' xlink:href='#resultBox-row-1' class='x-1 y1 row1'/>
+          <use x='350.0' y='174.4' xlink:href='#resultBox-row-2' class='x-1 y2 row2'/>
+          <use x='350.0' y='211.6' xlink:href='#resultBox-row-3' class='x-1 y3 row3'/>
+          <use x='350.0' y='248.8' xlink:href='#resultBox-row-4' class='x-1 y4 row4'/>
+          <use x='350.0' y='286.0' xlink:href='#resultBox-row-5' class='x-1 y5 row5'/>
+          <use x='350.0' y='323.2' xlink:href='#resultBox-row-6' class='x-1 y6 row6'/>
+          <use x='350.0' y='360.4' xlink:href='#resultBox-row-7' class='x-1 y7 row7'/>
+          <use x='350.0' y='397.6' xlink:href='#resultBox-row-8' class='x-1 y8 row8'/>
+          <use x='350.0' y='434.8' xlink:href='#resultBox-row-9' class='x-1 y9 row9'/>
+     </g>
+     <g id='factor-goal'>
+          <use x='350.0' y='100.0' xlink:href='#goalBox-row-0' class='x-1 y0 row0'/>
+          <use x='350.0' y='137.2' xlink:href='#goalBox-row-1' class='x-1 y1 row1'/>
+          <use x='350.0' y='174.4' xlink:href='#goalBox-row-2' class='x-1 y2 row2'/>
+          <use x='350.0' y='211.6' xlink:href='#goalBox-row-3' class='x-1 y3 row3'/>
+          <use x='350.0' y='248.8' xlink:href='#goalBox-row-4' class='x-1 y4 row4'/>
+          <use x='350.0' y='286.0' xlink:href='#goalBox-row-5' class='x-1 y5 row5'/>
+          <use x='350.0' y='323.2' xlink:href='#goalBox-row-6' class='x-1 y6 row6'/>
+          <use x='350.0' y='360.4' xlink:href='#goalBox-row-7' class='x-1 y7 row7'/>
+          <use x='350.0' y='397.6' xlink:href='#goalBox-row-8' class='x-1 y8 row8'/>
+          <use x='350.0' y='434.8' xlink:href='#goalBox-row-9' class='x-1 y9 row9'/>
+     </g>
+</svg>
